@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.WordInsertFragment">
+    tools:context=".fragments.WordInsertFragment"
+    android:background="@color/cardview_shadow_start_color">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

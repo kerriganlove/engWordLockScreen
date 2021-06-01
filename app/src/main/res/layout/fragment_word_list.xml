@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.WordListFragment">
+    tools:context=".fragments.WordListFragment"
+    android:background="@color/design_default_color_primary_dark">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

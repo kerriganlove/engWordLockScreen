@@ -1,23 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
-
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/main_toolbar"
+        android:background="@color/main_theme_blue">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:text="@string/main_title"/>
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        android:id="@+id/toolbar_division"
+        android:layout_below="@+id/main_toolbar"/>
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_division"
         android:id="@+id/main_view_pager">
-
     </androidx.viewpager2.widget.ViewPager2>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        android:id="@+id/viewpager_division"
+        android:layout_above="@+id/main_bottom_navigation"/>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/main_bottom_navigation">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/main_bottom_navigation"
+        app:menu="@menu/bottom_navigation_main"
+        app:itemTextColor="@drawable/menu_selector_color"
+        app:itemIconTint="@drawable/menu_selector_color">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-</LinearLayout>
+</RelativeLayout>
