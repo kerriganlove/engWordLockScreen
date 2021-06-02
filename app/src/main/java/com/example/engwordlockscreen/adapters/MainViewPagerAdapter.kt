@@ -12,8 +12,7 @@ class MainViewPagerAdapter(fa : FragmentActivity) : FragmentStateAdapter(fa) {
     }
 
     override fun createFragment(position: Int): Fragment {
-        var fragment : Fragment? = null
-        fragment = when(position) {
+        var fragment = when(position) {
             0 -> {
                 WordInsertFragment()
 
@@ -34,7 +33,7 @@ class MainViewPagerAdapter(fa : FragmentActivity) : FragmentStateAdapter(fa) {
                 error("Fucking Genius?")
             }
         }
-        return fragment!!
+        return fragment
     }
 
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/insert_form_design"
+    android:gravity="center"
+    android:layout_marginTop="10dp">
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/insert_form_spinner"
+        android:entries="@array/insert_spinner_array"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_selector_design"
+        android:hint="@string/mean_hint"
+        android:layout_toRightOf="@+id/insert_form_spinner"
+        android:layout_marginLeft="20dp"/>
+
+</RelativeLayout>

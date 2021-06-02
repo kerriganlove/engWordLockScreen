@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="insert_spinner_array">
+        <item>명사</item>
+        <item>동사</item>
+        <item>형용사</item>
+        <item>부사</item>
+        <item>기타</item>
+    </string-array>
+</resources>
