@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.example.engwordlockscreen.R
 
 class IdiomListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

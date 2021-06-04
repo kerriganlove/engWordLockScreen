@@ -20,25 +20,38 @@ class WordInsertFragment : Fragment() {
         buttonClick()
         return binding?.root
     }
-    private fun buttonClick()
-    {
-        binding?.insertFormButton!!.setOnClickListener {
-            val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
-            val mInflater = binding?.wordMeanInsert
-            val insertView = inflater?.inflate(R.layout.design_insert_form,mInflater,false)
-
-            if ( viewCount < 5 ) {
-                binding?.wordMeanInsert!!.addView(insertView)
-                viewCount++
-            }
-            else {
-                Toast.makeText(context,"더 이상 추가하실 수 없습니다.",Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-
     override fun onDestroy() {
         binding = null
         super.onDestroy()
     }
+
+    ////////////////////////////////////////// function
+
+    private fun buttonClick()
+    {
+        binding?.insertFormButton!!.setOnClickListener {
+            insertForm()
+        }
+        binding?.insertList!!.setOnClickListener {
+            insertList()
+        }
+    }
+    private fun insertForm()
+    {
+        val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
+        val mInflater = binding?.wordMeanInsert
+        val insertView = inflater?.inflate(R.layout.design_insert_form,mInflater,false)
+        if ( viewCount < 5 ) {
+            binding?.wordMeanInsert!!.addView(insertView)
+            viewCount++
+        }
+        else {
+            Toast.makeText(context,"더 이상 추가하실 수 없습니다.",Toast.LENGTH_LONG).show()
+        }
+    }
+    private fun insertList()
+    {
+
+    }
+
 }

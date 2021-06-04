@@ -39,11 +39,13 @@
         android:layout_below="@+id/word_mean_insert"
         android:gravity="center">
         <Button
+            android:id="@+id/insert_list_by_dic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/naver_dic_api"
             android:drawableLeft="@drawable/image_button_customize"/>
         <Button
+            android:id="@+id/insert_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/list_add"

@@ -1,12 +1,12 @@
 package com.example.engwordlockscreen
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.engwordlockscreen.adapters.MainViewPagerAdapter
 import com.example.engwordlockscreen.databinding.ActivityMainBinding
-import com.example.engwordlockscreen.fragments.WordInsertFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val intent = Intent(this, LoadingActivity::class.java)
+        startActivity(intent)
         init()
     }
     private fun init()
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         binding.mainBottomNavigation.selectedItemId = R.id.action_word_insert
         binding.mainViewPager.adapter = MainViewPagerAdapter(this)
         binding.mainViewPager.registerOnPageChangeCallback(PageChangeCallBack())
+
     }
     private inner class PageChangeCallBack : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
