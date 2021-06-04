@@ -1,5 +1,6 @@
 package com.example.engwordlockscreen
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -14,8 +15,10 @@ class LoadingActivity : AppCompatActivity() {
     }
     private fun startLoading()
     {
+        val intent = Intent(application,MainActivity::class.java)
         Handler(Looper.getMainLooper()).postDelayed({
-
+            startActivity(intent)
+            finish()
         },LOADING_TIME_OUT)
     }
 }

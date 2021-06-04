@@ -3,7 +3,6 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/insert_form_design"
     android:gravity="center"
     android:layout_marginTop="10dp">
 
@@ -14,6 +13,7 @@
         android:entries="@array/insert_spinner_array"/>
 
     <EditText
+        android:id="@+id/insert_mean_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/edittext_selector_design"

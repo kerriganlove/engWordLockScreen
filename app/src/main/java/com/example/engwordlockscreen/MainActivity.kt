@@ -14,8 +14,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val intent = Intent(this, LoadingActivity::class.java)
-        startActivity(intent)
         init()
     }
     private fun init()
