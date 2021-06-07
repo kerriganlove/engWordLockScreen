@@ -10,6 +10,8 @@
     <string name="word_hint">이 곳에 단어를 입력하세요.</string>
     <string name="mean_hint">이 곳에 뜻을 입력하세요.</string>
     <string name="insert_word_mean">뜻 추가</string>
+    <string name="delete_word_mean">뜻 삭제</string>
     <string name="naver_dic_api">네이버 사전에서 찾기</string>
     <string name="list_add">단어장에 추가</string>
+    <string name="db_clear">단어장 초기화</string>
 </resources>

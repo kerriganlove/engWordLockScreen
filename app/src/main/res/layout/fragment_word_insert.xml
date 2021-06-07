@@ -13,20 +13,35 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/edittext_selector_design"
         android:hint="@string/word_hint" />
-
-    <Button
-        android:layout_marginTop="10dp"
-        android:id="@+id/insert_form_button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_below="@+id/word_insert_edittext"
-        android:text="@string/insert_word_mean"/>
+        android:id="@+id/mean_button_list">
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/insert_form_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/insert_word_mean"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"/>
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/delete_form_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_word_mean"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/word_mean_insert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/insert_form_button"
+        android:layout_below="@+id/mean_button_list"
         android:orientation="vertical">
 
     </LinearLayout>

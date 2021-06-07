@@ -1,15 +1,13 @@
 package com.example.engwordlockscreen.database
 
-import androidx.room.Dao
-import androidx.room.Insert
+import androidx.room.*
+import androidx.room.OnConflictStrategy.ABORT
 import androidx.room.OnConflictStrategy.REPLACE
-import androidx.room.Query
-import androidx.room.Update
 
 @Dao
 interface WordDAO
 {
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = ABORT)
     fun insertWordDB(wordEntity : WordEntity)
 
     @Update
@@ -20,6 +18,5 @@ interface WordDAO
 
     @Query("SELECT :word FROM wordDB")
     fun wordCheck (word : String) : Boolean
-
 
 }
