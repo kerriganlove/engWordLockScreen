@@ -19,4 +19,6 @@ interface WordDAO
     @Query("SELECT :word FROM wordDB")
     fun wordCheck (word : String) : Boolean
 
+    @Query("SELECT * FROM wordDB ORDER BY word")
+    fun viewList() : MutableList<WordEntity>
 }
