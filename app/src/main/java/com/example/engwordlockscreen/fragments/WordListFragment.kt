@@ -12,11 +12,8 @@ import com.example.engwordlockscreen.database.WordDatabase
 import com.example.engwordlockscreen.database.WordEntity
 import com.example.engwordlockscreen.databinding.FragmentWordListBinding
 import com.example.engwordlockscreen.databinding.ListCustomItemBinding
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class WordListFragment : Fragment() {
 
@@ -27,31 +24,27 @@ class WordListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentWordListBinding.inflate(inflater,container,false)
-        wordDB = WordDatabase.getInstance(requireContext())!!
         init()
         return binding!!.root
     }
 
     override fun onDestroyView() {
-        binding = null
         super.onDestroyView()
+        binding = null
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun init()
     {
-        binding!!.wordListRecyclerview.adapter = WordListRecyclerViewAdapter()
-        binding!!.wordListRecyclerview.layoutManager = LinearLayoutManager(activity)
+        wordDB = WordDatabase.getInstance(requireContext())!!
+        selectList()
         //binding?.wordListRecyclerview?.addOnItemTouchListener()
     }
 
     inner class WordListRecyclerViewAdapter : RecyclerView.Adapter<WordListRecyclerViewAdapter.CustomViewHolder>()
     {
         init {
-            startList.clear()
-            wordList.clear()
-            selectList()
             notifyDataSetChanged()
         }
         inner class CustomViewHolder(var viewBinding : ListCustomItemBinding) : RecyclerView.ViewHolder(viewBinding.root)
@@ -76,10 +69,13 @@ class WordListFragment : Fragment() {
 
     private fun selectList()
     {
-        CoroutineScope(IO).launch {
-            var view = wordDB.wordDAO().viewList()
-            startList = view
-            WordListRecyclerViewAdapter().notifyDataSetChanged()
-        }
+        wordDB.wordDAO().viewList().observe(viewLifecycleOwner,androidx.lifecycle.Observer {
+            startList.clear()
+            wordList.clear()
+            startList = it
+            binding!!.wordListRecyclerview.adapter = WordListRecyclerViewAdapter()
+            binding!!.wordListRecyclerview.layoutManager = LinearLayoutManager(activity)
+            Log.d("Hi ",startList[startList.size-1].word)
+        })
     }
 }

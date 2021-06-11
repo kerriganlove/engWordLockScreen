@@ -39,8 +39,8 @@ class WordInsertFragment : Fragment() {
         buttonClick()
         return binding?.root
     }
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         binding = null
         viewCount = 0
     }
@@ -94,23 +94,27 @@ class WordInsertFragment : Fragment() {
 
     private fun insertDB()
     {
-        for (i in binding?.wordMeanInsert?.children!!) {
-            var meanId =
-                i.findViewById<RelativeLayout>(i.id)
-                    ?.findViewById<EditText>(R.id.insert_mean_edittext)
-            var partId =
-                i.findViewById<RelativeLayout>(i.id)
-                    ?.findViewById<Spinner>(R.id.insert_form_spinner)
-            var mean = meanId?.text.toString()
-            var part = partId?.selectedItem.toString()
-            var word = binding?.wordInsertEdittext?.text.toString()
-            var wordEntity = WordEntity(0,word,part,mean)
-            if ( mean != "" && word != "") {
-                wordList.add(wordEntity)
+        var word = binding?.wordInsertEdittext?.text.toString()
+        if ( word == "") { Toast.makeText(context,"단어 또는 뜻이 없어 추가할 수 없습니다.",Toast.LENGTH_SHORT).show() }
+        else {
+            for (i in binding?.wordMeanInsert?.children!!) {
+                var meanId =
+                    i.findViewById<RelativeLayout>(i.id)
+                        ?.findViewById<EditText>(R.id.insert_mean_edittext)
+                var partId =
+                    i.findViewById<RelativeLayout>(i.id)
+                        ?.findViewById<Spinner>(R.id.insert_form_spinner)
+                var mean = meanId?.text.toString()
+                var part = partId?.selectedItem.toString()
+                var wordEntity = WordEntity(0, word, part, mean)
+                if (mean != "" && word != "") {
+                    wordList.add(wordEntity)
+                } else {
+                    Toast.makeText(context, "단어 또는 뜻이 없어 추가할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                }
             }
-            else { Toast.makeText(context,"단어 또는 뜻이 없어 추가할 수 없습니다.",Toast.LENGTH_SHORT).show() }
+            insertList(wordList)
         }
-        insertList(wordList)
     }
 
     private fun insertList(wordEntity: ArrayList<WordEntity>)

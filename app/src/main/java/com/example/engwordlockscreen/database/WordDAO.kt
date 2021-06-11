@@ -1,8 +1,8 @@
 package com.example.engwordlockscreen.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.OnConflictStrategy.ABORT
-import androidx.room.OnConflictStrategy.REPLACE
 
 @Dao
 interface WordDAO
@@ -19,6 +19,6 @@ interface WordDAO
     @Query("SELECT :word FROM wordDB")
     fun wordCheck (word : String) : Boolean
 
-    @Query("SELECT * FROM wordDB ORDER BY word")
-    fun viewList() : MutableList<WordEntity>
+    @Query("SELECT * FROM wordDB GROUP BY word ORDER BY id")
+    fun viewList() : LiveData<MutableList<WordEntity>>
 }
