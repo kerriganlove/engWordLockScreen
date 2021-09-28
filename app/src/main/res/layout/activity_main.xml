@@ -28,7 +28,8 @@
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_division"
+        android:layout_below="@+id/toolbar_division"
+        android:layout_above="@id/viewpager_division"
         android:id="@+id/main_view_pager">
     </androidx.viewpager2.widget.ViewPager2>
     <LinearLayout

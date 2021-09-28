@@ -38,27 +38,27 @@ class WordListFragment : Fragment() {
     private fun init()
     {
         wordDB = WordDatabase.getInstance(requireContext())!!
+        binding!!.wordListRecyclerview.adapter = WordListRecyclerViewAdapter()
+        binding!!.wordListRecyclerview.layoutManager = LinearLayoutManager(activity)
         selectList()
         //binding?.wordListRecyclerview?.addOnItemTouchListener()
     }
 
     inner class WordListRecyclerViewAdapter : RecyclerView.Adapter<WordListRecyclerViewAdapter.CustomViewHolder>()
     {
-        init {
-            notifyDataSetChanged()
-        }
         inner class CustomViewHolder(var viewBinding : ListCustomItemBinding) : RecyclerView.ViewHolder(viewBinding.root)
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
             var view = ListCustomItemBinding.inflate(LayoutInflater.from(context),parent,false)
+            Log.d("Data22",view.listWordTextview.text.toString())
             return CustomViewHolder(view)
         }
 
         override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
             holder.viewBinding.listWordTextview.text = startList[position].word
-            Log.d("Data 11",holder.viewBinding.listWordTextview.text.toString())
             holder.viewBinding.listPartTextview.text = startList[position].parts
             holder.viewBinding.listMeanTextview.text = startList[position].mean
+            Log.d("Data 11",holder.viewBinding.listWordTextview.text.toString())
         }
 
         override fun getItemCount(): Int {
@@ -72,10 +72,10 @@ class WordListFragment : Fragment() {
         wordDB.wordDAO().viewList().observe(viewLifecycleOwner,androidx.lifecycle.Observer {
             startList.clear()
             wordList.clear()
-            startList = it
-            binding!!.wordListRecyclerview.adapter = WordListRecyclerViewAdapter()
-            binding!!.wordListRecyclerview.layoutManager = LinearLayoutManager(activity)
-            Log.d("Hi ",startList[startList.size-1].word)
+            startList.addAll(it)
+            binding!!.wordListRecyclerview.adapter!!.notifyDataSetChanged()
+            var itemCount = binding!!.wordListRecyclerview.adapter!!.itemCount
+            Log.d("Hi ",startList[itemCount-1].word)
         })
     }
 }

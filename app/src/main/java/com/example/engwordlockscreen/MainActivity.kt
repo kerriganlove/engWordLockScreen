@@ -3,6 +3,7 @@ package com.example.engwordlockscreen
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.engwordlockscreen.adapters.MainViewPagerAdapter
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.action_word_list->
             {
                 binding.mainViewPager.currentItem = 1
+                // binding.mainBottomNavigation.visibility = View.GONE
                 return true
             }
             R.id.action_idiom_insert->
