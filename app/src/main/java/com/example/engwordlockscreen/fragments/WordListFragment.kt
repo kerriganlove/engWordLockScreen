@@ -6,14 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.database.WordDatabase
 import com.example.engwordlockscreen.database.WordEntity
 import com.example.engwordlockscreen.databinding.FragmentWordListBinding
 import com.example.engwordlockscreen.databinding.ListCustomItemBinding
-import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
+import com.example.engwordlockscreen.listeners.RecyclerItemClickListener
 
 class WordListFragment : Fragment() {
 
@@ -21,6 +23,7 @@ class WordListFragment : Fragment() {
     var wordList : MutableList<WordEntity> = mutableListOf()
     lateinit var wordDB : WordDatabase
     var binding : FragmentWordListBinding? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentWordListBinding.inflate(inflater,container,false)
@@ -40,13 +43,24 @@ class WordListFragment : Fragment() {
         wordDB = WordDatabase.getInstance(requireContext())!!
         binding!!.wordListRecyclerview.adapter = WordListRecyclerViewAdapter()
         binding!!.wordListRecyclerview.layoutManager = LinearLayoutManager(activity)
+        binding!!.wordListRecyclerview.addOnItemTouchListener(RecyclerItemClickListener(requireContext(), binding!!.wordListRecyclerview, object : RecyclerItemClickListener.OnItemClickListener
+        {
+            override fun onItemClick(view: View, position: Int) {
+                selectWord(view.findViewById<TextView>(R.id.list_word_textview).text.toString())
+            }
+
+            override fun onItemLongClick(view: View, position: Int) {
+                Log.d("ITEMLONGCLICK","Hi Clicked")
+                Toast.makeText(context,"Hi Long Clicked",Toast.LENGTH_LONG)
+            }
+        }))
         selectList()
-        //binding?.wordListRecyclerview?.addOnItemTouchListener()
     }
 
     inner class WordListRecyclerViewAdapter : RecyclerView.Adapter<WordListRecyclerViewAdapter.CustomViewHolder>()
     {
         inner class CustomViewHolder(var viewBinding : ListCustomItemBinding) : RecyclerView.ViewHolder(viewBinding.root)
+
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
             var view = ListCustomItemBinding.inflate(LayoutInflater.from(context),parent,false)
@@ -75,7 +89,11 @@ class WordListFragment : Fragment() {
             startList.addAll(it)
             binding!!.wordListRecyclerview.adapter!!.notifyDataSetChanged()
             var itemCount = binding!!.wordListRecyclerview.adapter!!.itemCount
-            Log.d("Hi ",startList[itemCount-1].word)
+            // Log.d("Hi ",startList[itemCount-1].word)
         })
+    }
+    private fun selectWord(s : String)
+    {
+
     }
 }
