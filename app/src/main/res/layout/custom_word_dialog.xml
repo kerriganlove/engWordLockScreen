@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/dialog_main_word"
+        android:textSize="50dp"
+        android:gravity="center"
+        android:textStyle="bold">
+    </TextView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        android:id="@+id/dialog_toolbar_division"
+        android:layout_below="@+id/main_toolbar"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mean_recyclerview"
+        tools:listitem="@layout/dialog_custom_item">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

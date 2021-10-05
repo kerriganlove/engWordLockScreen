@@ -21,4 +21,7 @@ interface WordDAO
 
     @Query("SELECT * FROM wordDB GROUP BY word ORDER BY id")
     fun viewList() : LiveData<MutableList<WordEntity>>
+
+    @Query("SELECT * FROM wordDB WHERE word = :s")
+    fun viewSameWord(s : String) : LiveData<MutableList<WordEntity>>
 }
