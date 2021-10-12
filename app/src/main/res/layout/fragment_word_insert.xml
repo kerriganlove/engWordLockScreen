@@ -8,11 +8,13 @@
 
     <EditText
         android:id="@+id/word_insert_edittext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittext_selector_design"
-        android:hint="@string/word_hint" />
+        android:hint="@string/word_hint"
+        android:gravity="center"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

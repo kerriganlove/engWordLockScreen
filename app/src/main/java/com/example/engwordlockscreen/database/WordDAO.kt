@@ -24,4 +24,7 @@ interface WordDAO
 
     @Query("SELECT * FROM wordDB WHERE word = :s")
     fun viewSameWord(s : String) : LiveData<MutableList<WordEntity>>
+
+    @Query("DELETE FROM wordDB WHERE word = :s")
+    fun deleteSameWords(s : String)
 }

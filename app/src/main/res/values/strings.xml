@@ -14,4 +14,8 @@
     <string name="naver_dic_api">네이버 사전에서 찾기</string>
     <string name="list_add">단어장에 추가</string>
     <string name="db_clear">단어장 초기화</string>
+    <string name="warning_notify">예를 누를 시 해당 단어가 전체 삭제됩니다.</string>
+    <string name="warning_isOk">삭제하시겠습니까?</string>
+    <string name="yes">예</string>
+    <string name="no">아니오</string>
 </resources>

@@ -18,6 +18,11 @@ import com.example.engwordlockscreen.database.WordEntity
 import com.example.engwordlockscreen.databinding.FragmentWordListBinding
 import com.example.engwordlockscreen.databinding.ListCustomItemBinding
 import com.example.engwordlockscreen.listeners.RecyclerItemClickListener
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class WordListFragment : Fragment() {
 
@@ -53,8 +58,14 @@ class WordListFragment : Fragment() {
             }
 
             override fun onItemLongClick(view: View, position: Int) {
-                Log.d("ITEMLONGCLICK","Hi Clicked")
-                Toast.makeText(requireContext(),"Hi Long Clicked",Toast.LENGTH_LONG)
+                var dlg = CustomDialog(requireContext())
+                dlg.wordDeleteFunction()
+                dlg.onClickedListener(object : CustomDialog.ButtonClicked
+                {
+                    override fun onClicked() {
+                        deleteWord(startList[position].word,position)
+                    }
+                })
             }
         }))
         selectList()
@@ -77,5 +88,17 @@ class WordListFragment : Fragment() {
             var dlg = CustomDialog(requireContext())
             dlg.wordListFunction(wordList)
         })
+    }
+    fun deleteWord(s : String, pos : Int)
+    {
+        CoroutineScope(IO).launch {
+            wordDB.wordDAO().deleteSameWords(s)
+            withContext(Main){
+                startList.removeAt(pos)
+                binding!!.wordListRecyclerview.adapter!!.notifyItemRemoved(pos)
+                binding!!.wordListRecyclerview.adapter!!.notifyDataSetChanged()
+                Log.d("Hi_Delete","Is Click?")
+            }
+        }
     }
 }
