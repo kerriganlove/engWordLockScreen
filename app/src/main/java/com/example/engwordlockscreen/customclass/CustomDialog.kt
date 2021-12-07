@@ -42,8 +42,8 @@ class CustomDialog(context : Context)
             binding.dialogMainWord.text = wordList[0].word
             binding.meanRecyclerview.adapter = DialogRecyclerViewAdapter(wordList, context)
             binding.meanRecyclerview.layoutManager = LinearLayoutManager(context)
+            dlg.show()
         }
-        dlg.show()
     }
     fun wordDeleteFunction()
     {

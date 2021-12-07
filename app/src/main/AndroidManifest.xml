@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.engwordlockscreen">
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,9 +20,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LockScreenActivity" />
+        <activity android:name=".lockscreen.LockScreenActivity"
+            android:permission="android.permission.SYSTEM_ALERT_WINDOW"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:taskAffinity="com.example.engwordlockscreen.lockscreen"/>
         <activity android:name=".MainActivity">
         </activity>
+        <service android:name=".lockscreen.LockScreenService"
+            android:enabled="true"
+            android:permission="android.permission.SYSTEM_ALERT_WINDOW"
+            android:exported="false"/> // exported = 타 어플리케이션의 해당 서비스 호출 가능 여부
+
     </application>
 
 </manifest>

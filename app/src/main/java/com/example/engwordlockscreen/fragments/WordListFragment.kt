@@ -29,18 +29,20 @@ class WordListFragment : Fragment() {
     var startList : MutableList<WordEntity> = mutableListOf()
     var wordList : MutableList<WordEntity> = mutableListOf()
     lateinit var wordDB : WordDatabase
-    var binding : FragmentWordListBinding? = null
+    private var _binding : FragmentWordListBinding? = null
+    private val binding get() = _binding!!
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentWordListBinding.inflate(inflater,container,false)
+        _binding = FragmentWordListBinding.inflate(inflater,container,false)
         init()
-        return binding!!.root
+        return binding.root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +72,6 @@ class WordListFragment : Fragment() {
         }))
         selectList()
     }
-
 
     private fun selectList()
     {

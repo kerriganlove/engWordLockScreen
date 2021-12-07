@@ -27,4 +27,5 @@ interface WordDAO
 
     @Query("DELETE FROM wordDB WHERE word = :s")
     fun deleteSameWords(s : String)
+
 }
