@@ -18,11 +18,21 @@ class LockScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityLockScreenBinding.inflate(layoutInflater)
-
+        setContentView(binding.root)
+        init()
+    }
+    private fun init()
+    {
+        screenOn()
+        binding.screenOffButton.setOnClickListener {
+            finish()
+        }
+    }
+    private fun screenOn()
+    {
         if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1)
         {
             setShowWhenLocked(true)
-            setTurnScreenOn(true)
             val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
             keyguardManager.requestDismissKeyguard(this,null)
         }
@@ -30,6 +40,5 @@ class LockScreenActivity : AppCompatActivity() {
         {
             this.window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
         }
-        setContentView(binding.root)
     }
 }

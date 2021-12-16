@@ -18,4 +18,5 @@
     <string name="warning_isOk">삭제하시겠습니까?</string>
     <string name="yes">예</string>
     <string name="no">아니오</string>
+    <string name="screen_off">무료 해제</string>
 </resources>

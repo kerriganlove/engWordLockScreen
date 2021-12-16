@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val intent = Intent(applicationContext, LockScreenService::class.java)
         if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intent)
+            Log.d("startService","Service")
         }
         else
         {
@@ -61,6 +63,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                         startModule()
                     }
                 }
+                getResult.launch(intent)
+            }
+            else
+            {
+                startModule()
             }
         }
         else
@@ -75,7 +82,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         binding.mainViewPager.adapter = MainViewPagerAdapter(this)
         binding.mainViewPager.registerOnPageChangeCallback(PageChangeCallBack())
         checkPermission()
-
     }
     private inner class PageChangeCallBack : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
