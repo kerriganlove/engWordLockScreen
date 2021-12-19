@@ -37,22 +37,21 @@ class LockScreenService : Service()
 
     override fun onCreate() {
         super.onCreate()
-        Log.d("Hi2","ServiceOn")
         if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            val channel = NotificationChannel("Background", "Bye",NotificationManager.IMPORTANCE_MIN)
+            val channel = NotificationChannel("Background", "Bye",NotificationManager.IMPORTANCE_NONE)
             nm.createNotificationChannel(channel)
             val notification = Notification.Builder(this,channel.id).build()
             startForeground(1,notification)
-            stopForeground(true)
+            //stopForeground(true)
         }
 
-        val filter = IntentFilter().apply { addAction(Intent.ACTION_SCREEN_OFF) }
-        registerReceiver(receiver,filter)
     }
     // Service 실행시 1번 발생.
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val filter = IntentFilter().apply { addAction(Intent.ACTION_SCREEN_OFF) }
+        registerReceiver(receiver,filter)
         return super.onStartCommand(intent, flags, startId)
 
         return Service.START_STICKY
@@ -60,6 +59,7 @@ class LockScreenService : Service()
 
     override fun onDestroy() {
         super.onDestroy()
+        Log.d("serivceDown","Hi")
         unregisterReceiver(receiver)
     }
 }

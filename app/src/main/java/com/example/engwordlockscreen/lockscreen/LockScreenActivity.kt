@@ -8,6 +8,9 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import android.view.WindowManager
 import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.databinding.ActivityLockScreenBinding
@@ -30,11 +33,29 @@ class LockScreenActivity : AppCompatActivity() {
     }
     private fun screenOn()
     {
-        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+        {
+            window.setDecorFitsSystemWindows(false)
+            val controller = window.insetsController
+            controller?.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+            controller?.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
+        else
+        {
+            window.decorView.systemUiVisibility =
+                (View.SYSTEM_UI_FLAG_IMMERSIVE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
+
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1)
         {
             setShowWhenLocked(true)
             val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-            keyguardManager.requestDismissKeyguard(this,null)
+            keyguardManager.requestDismissKeyguard(this, null)
         }
         else
         {

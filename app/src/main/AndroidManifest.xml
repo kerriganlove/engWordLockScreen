@@ -25,13 +25,13 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
-            android:taskAffinity="com.example.engwordlockscreen.lockscreen"/>
+            android:taskAffinity="com.example.engwordlockscreen.lockscreen" />
         <activity android:name=".MainActivity">
         </activity>
         <service android:name=".lockscreen.LockScreenService"
             android:enabled="true"
             android:permission="android.permission.SYSTEM_ALERT_WINDOW"
-            android:exported="false"/> // exported = 타 어플리케이션의 해당 서비스 호출 가능 여부
+            android:exported="false" /> // exported = 타 어플리케이션의 해당 서비스 호출 가능 여부
 
     </application>
 
