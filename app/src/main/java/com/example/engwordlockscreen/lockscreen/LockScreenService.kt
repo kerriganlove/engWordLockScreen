@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import com.example.engwordlockscreen.R
+import java.security.SecureRandom
 
 class LockScreenService : Service()
 {
@@ -22,6 +23,9 @@ class LockScreenService : Service()
                     {
                         val lockIntent = Intent(applicationContext, LockScreenActivity::class.java)
                         lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        val secureRandom = SecureRandom()
+                        val quizNum = secureRandom.nextInt(3)
+                        lockIntent.putExtra("quizUI",quizNum)
                         Log.d("Hi","LockscreenService On")
                         startActivity(lockIntent)
                     }

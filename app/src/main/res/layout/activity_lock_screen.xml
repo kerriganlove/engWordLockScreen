@@ -18,8 +18,8 @@
         android:id="@+id/clock_division"
         android:layout_below="@+id/text_clock"/>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/quiz_viewpager"
+    <FrameLayout
+        android:id="@+id/quiz_fragments"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/viewpager_division"

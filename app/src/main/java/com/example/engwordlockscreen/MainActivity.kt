@@ -29,17 +29,17 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         setContentView(binding.root)
         init()
     }
-    private fun startModule()
-    {
-        val intent = Intent(applicationContext, LockScreenService::class.java)
-        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(intent)
-            Log.d("startService","Service")
-        }
-        else
+        private fun startModule()
         {
-            startService(intent)
-        }
+            val intent = Intent(applicationContext, LockScreenService::class.java)
+            if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(intent)
+                Log.d("startService","Service")
+            }
+            else
+            {
+                startService(intent)
+            }
     }
 
     private fun checkPermission() {
