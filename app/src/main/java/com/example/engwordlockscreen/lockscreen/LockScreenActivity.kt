@@ -9,7 +9,11 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import androidx.fragment.app.Fragment
 import com.example.engwordlockscreen.databinding.ActivityLockScreenBinding
+import com.example.engwordlockscreen.fragments.IdiomInsertFragment
+import com.example.engwordlockscreen.fragments.IdiomListFragment
+import com.example.engwordlockscreen.fragments.MultiChoiceFragment
 
 class LockScreenActivity : AppCompatActivity() {
     private var _binding : ActivityLockScreenBinding? = null
@@ -26,6 +30,20 @@ class LockScreenActivity : AppCompatActivity() {
         binding.screenOffButton.setOnClickListener {
             finish()
         }
+        val num = intent.getIntExtra("quizUI",4)
+        val fragment = quizChoice(num)
+        val sfm = supportFragmentManager.beginTransaction()
+        sfm.replace(binding.quizFragments.id,fragment).commit()
+    }
+    private fun quizChoice(num : Int) : Fragment {
+        var fragment = when(num)
+        {
+            0 -> IdiomListFragment()
+            1 -> IdiomInsertFragment()
+            2 -> MultiChoiceFragment()
+            else -> error("quizError")
+        }
+        return fragment
     }
     private fun screenOn()
     {
