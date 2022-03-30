@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen
+package com.example.engwordlockscreen.presentation.main.components
 
 import android.content.Intent
 import android.net.Uri
@@ -7,16 +7,15 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.adapters.MainViewPagerAdapter
 import com.example.engwordlockscreen.databinding.ActivityMainBinding
-import com.example.engwordlockscreen.lockscreen.LockScreenService
+import com.example.engwordlockscreen.presentation.lockscreen.LockScreenService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -100,28 +99,28 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId)
         {
-            R.id.action_word_insert->
+            R.id.action_word_insert ->
             {
                 binding.mainViewPager.currentItem = 0
                 return true
             }
-            R.id.action_word_list->
+            R.id.action_word_list ->
             {
                 binding.mainViewPager.currentItem = 1
                 // binding.mainBottomNavigation.visibility = View.GONE
                 return true
             }
-            R.id.action_idiom_insert->
+            R.id.action_idiom_insert ->
             {
                 binding.mainViewPager.currentItem = 2
                 return true
             }
-            R.id.action_idiom_list->
+            R.id.action_idiom_list ->
             {
                 binding.mainViewPager.currentItem = 3
                 return true
             }
-            R.id.action_setting->
+            R.id.action_setting ->
             {
                 binding.mainViewPager.currentItem = 4
                 return true

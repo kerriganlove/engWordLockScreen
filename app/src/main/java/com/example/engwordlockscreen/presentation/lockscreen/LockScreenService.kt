@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.lockscreen
+package com.example.engwordlockscreen.presentation.lockscreen
 
 import android.app.*
 import android.content.BroadcastReceiver
@@ -8,7 +8,7 @@ import android.content.IntentFilter
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
-import com.example.engwordlockscreen.R
+import com.example.engwordlockscreen.presentation.lockscreen.components.LockScreenActivity
 import java.security.SecureRandom
 
 class LockScreenService : Service()

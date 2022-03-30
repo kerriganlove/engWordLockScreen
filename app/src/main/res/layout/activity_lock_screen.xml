@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".lockscreen.LockScreenActivity"
+    tools:context=".presentation.lockscreen.lockscreen.LockScreenActivity"
     android:orientation="vertical"
     android:background="@color/cardview_light_background">
     <TextClock

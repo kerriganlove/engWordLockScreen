@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.customclass
+package com.example.engwordlockscreen.presentation.utils
 
 import android.app.Dialog
 import android.content.Context
@@ -7,10 +7,9 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.engwordlockscreen.adapters.DialogRecyclerViewAdapter
-import com.example.engwordlockscreen.database.WordEntity
+import com.example.engwordlockscreen.domain.database.WordEntity
 import com.example.engwordlockscreen.databinding.CustomDeleteDialogBinding
 import com.example.engwordlockscreen.databinding.CustomWordDialogBinding
-import com.example.engwordlockscreen.fragments.WordListFragment
 
 class CustomDialog(context : Context)
 {
