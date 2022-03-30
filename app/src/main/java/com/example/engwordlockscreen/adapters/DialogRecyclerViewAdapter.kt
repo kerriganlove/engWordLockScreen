@@ -1,11 +1,10 @@
 package com.example.engwordlockscreen.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.engwordlockscreen.database.WordEntity
+import com.example.engwordlockscreen.domain.database.WordEntity
 import com.example.engwordlockscreen.databinding.DialogCustomItemBinding
 
 class DialogRecyclerViewAdapter(wordList : MutableList<WordEntity>, context : Context) : RecyclerView.Adapter<DialogRecyclerViewAdapter.CustomViewHolder>()

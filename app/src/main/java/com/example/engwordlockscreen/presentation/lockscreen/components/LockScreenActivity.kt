@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.lockscreen
+package com.example.engwordlockscreen.presentation.lockscreen.components
 
 import android.app.KeyguardManager
 import android.content.Context

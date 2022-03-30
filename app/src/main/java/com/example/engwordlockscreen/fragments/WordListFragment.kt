@@ -6,17 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.adapters.WordListRecyclerViewAdapter
-import com.example.engwordlockscreen.customclass.CustomDialog
-import com.example.engwordlockscreen.database.WordDatabase
-import com.example.engwordlockscreen.database.WordEntity
+import com.example.engwordlockscreen.presentation.utils.CustomDialog
+import com.example.engwordlockscreen.data.datasource.WordDatabase
+import com.example.engwordlockscreen.domain.database.WordEntity
 import com.example.engwordlockscreen.databinding.FragmentWordListBinding
-import com.example.engwordlockscreen.databinding.ListCustomItemBinding
 import com.example.engwordlockscreen.listeners.RecyclerItemClickListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -73,7 +68,7 @@ class WordListFragment : Fragment() {
         selectList()
     }
 
-    private fun selectList()
+    private suspend fun selectList()
     {
         wordDB.wordDAO().viewList().observe(viewLifecycleOwner,androidx.lifecycle.Observer {
             startList.clear()

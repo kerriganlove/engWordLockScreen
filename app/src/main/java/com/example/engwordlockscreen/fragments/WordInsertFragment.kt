@@ -2,7 +2,6 @@ package com.example.engwordlockscreen.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +9,10 @@ import android.widget.*
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import com.example.engwordlockscreen.R
-import com.example.engwordlockscreen.database.WordDatabase
-import com.example.engwordlockscreen.database.WordEntity
+import com.example.engwordlockscreen.data.datasource.WordDatabase
+import com.example.engwordlockscreen.domain.database.WordEntity
 import com.example.engwordlockscreen.databinding.FragmentWordInsertBinding
-import com.example.engwordlockscreen.filters.StringFilter
+import com.example.engwordlockscreen.presentation.utils.StringFilter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main

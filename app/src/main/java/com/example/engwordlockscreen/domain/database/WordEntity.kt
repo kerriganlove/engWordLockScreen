@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.database
+package com.example.engwordlockscreen.domain.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

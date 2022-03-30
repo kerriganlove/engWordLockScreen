@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.lockscreen
+package com.example.engwordlockscreen.presentation.lockscreen
 
 import androidx.lifecycle.ViewModel
 
