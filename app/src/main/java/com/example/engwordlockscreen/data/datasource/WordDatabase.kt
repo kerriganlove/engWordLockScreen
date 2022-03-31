@@ -12,17 +12,6 @@ abstract class WordDatabase : RoomDatabase()
     abstract fun wordDAO() : WordDAO
 
     companion object {
-        var Instance : WordDatabase? = null
-
-        fun getInstance(context : Context) : WordDatabase? {
-            if ( Instance == null )
-            {
-                synchronized(WordDatabase::class){
-                    Instance = Room.databaseBuilder(context.applicationContext, WordDatabase::class.java, "wordDB.db")
-                        .build()
-                }
-            }
-            return Instance
-        }
+        const val DATABASE_NAME = "wordDB.db"
     }
 }

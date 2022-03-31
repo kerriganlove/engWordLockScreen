@@ -3,8 +3,8 @@ package com.example.engwordlockscreen.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.example.engwordlockscreen.fragments.*
+import com.example.engwordlockscreen.presentation.insert_word.components.WordInsertFragment
 
 class MainViewPagerAdapter(fa : FragmentActivity) : FragmentStateAdapter(fa) {
     override fun getItemCount(): Int {

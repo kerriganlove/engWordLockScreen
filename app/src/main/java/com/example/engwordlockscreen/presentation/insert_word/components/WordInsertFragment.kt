@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.fragments
+package com.example.engwordlockscreen.presentation.insert_word.components
 
 import android.content.Context
 import android.os.Bundle
