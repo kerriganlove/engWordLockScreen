@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.presentation.insert_word.components
+package com.example.engwordlockscreen.presentation.word.components
 
 import android.content.Context
 import android.os.Bundle
@@ -7,19 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.children
+import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.data.datasource.WordDatabase
+import com.example.engwordlockscreen.data.repository.WordRepositoryImpl
 import com.example.engwordlockscreen.domain.database.WordEntity
 import com.example.engwordlockscreen.databinding.FragmentWordInsertBinding
+import com.example.engwordlockscreen.domain.repository.WordRepository
+import com.example.engwordlockscreen.domain.usecase.DeleteAllWordUseCase
+import com.example.engwordlockscreen.domain.usecase.WordUseCases
+import com.example.engwordlockscreen.presentation.main.MainViewModel
 import com.example.engwordlockscreen.presentation.utils.StringFilter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
+import com.example.engwordlockscreen.presentation.word.WordEvent
+import com.example.engwordlockscreen.presentation.word.WordViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-
+@AndroidEntryPoint
 class WordInsertFragment : Fragment() {
     private var inflater : LayoutInflater? = null
     private var mInflater : LinearLayout? = null
@@ -28,12 +37,12 @@ class WordInsertFragment : Fragment() {
     private var viewCount : Int = 0
     private var binding : FragmentWordInsertBinding? = null
     private var wordList = arrayListOf<WordEntity>()
+    private val viewModel by viewModels<WordViewModel>()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         binding = FragmentWordInsertBinding.inflate(inflater,container,false)
-        wordDB = WordDatabase.getInstance(requireContext())!!
         init()
         buttonClick()
         return binding?.root
@@ -93,40 +102,44 @@ class WordInsertFragment : Fragment() {
 
     private fun insertDB()
     {
-        var word = binding?.wordInsertEdittext?.text.toString()
-        if ( word == "") { Toast.makeText(context,"단어 또는 뜻이 없어 추가할 수 없습니다.",Toast.LENGTH_SHORT).show() }
+        val word = binding?.wordInsertEdittext?.text.toString()
+        if ( word == "" ) { Toast.makeText(context,"단어 또는 뜻이 없어 추가할 수 없습니다.",Toast.LENGTH_SHORT).show() }
         else {
             for (i in binding?.wordMeanInsert?.children!!) {
-                var meanId =
+                val meanId =
                     i.findViewById<RelativeLayout>(i.id)
                         ?.findViewById<EditText>(R.id.insert_mean_edittext)
-                var partId =
+                val partId =
                     i.findViewById<RelativeLayout>(i.id)
                         ?.findViewById<Spinner>(R.id.insert_form_spinner)
-                var mean = meanId?.text.toString()
-                var part = partId?.selectedItem.toString()
-                var wordEntity = WordEntity(0, word, part, mean)
+                val mean = meanId?.text.toString()
+                val part = partId?.selectedItem.toString()
+                val wordEntity = WordEntity(0, word, part, mean)
                 if (mean != "" && word != "") {
                     wordList.add(wordEntity)
                 } else {
                     Toast.makeText(context, "단어 또는 뜻이 없어 추가할 수 없습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
-            insertList(wordList)
+            if ( !wordList.isEmpty() ) {
+                insertList(wordList)
+            }
+            else
+            {
+                Toast.makeText(context, "단어 또는 뜻이 없어 추가할 수 없습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     private fun insertList(wordEntity: ArrayList<WordEntity>)
     {
-        CoroutineScope(IO).launch{
-            for ( i in wordEntity.indices)
-            {
-                wordDB.wordDAO().insertWordDB(wordEntity[i])
-            }
-            withContext(Main){
-                Toast.makeText(context,wordEntity[0].word + " 등록 완료.",Toast.LENGTH_LONG).show()
-                wordList.clear()
-            }
+        for ( i in wordEntity.indices)
+        {
+            viewModel.onEvent(WordEvent.Insert(wordEntity[i]))
+        }
+        lifecycleScope.launch {
+            Toast.makeText(context,wordEntity[0].word + " 등록 완료.",Toast.LENGTH_LONG).show()
+            wordList.clear()
         }
     }
 

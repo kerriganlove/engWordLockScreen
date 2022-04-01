@@ -21,12 +21,15 @@ interface WordDAO
     suspend fun wordCheck (word : String) : Boolean
 
     @Query("SELECT * FROM wordDB GROUP BY word ORDER BY id")
-    suspend fun viewList() : LiveData<MutableList<WordEntity>>
+    fun viewList() : LiveData<MutableList<WordEntity>>
 
     @Query("SELECT * FROM wordDB WHERE word = :s")
-    suspend fun viewSameWord(s : String) : LiveData<MutableList<WordEntity>>
+    fun viewSameWord(s : String) : LiveData<MutableList<WordEntity>>
 
     @Query("DELETE FROM wordDB WHERE word = :s")
     suspend fun deleteSameWords(s : String)
+
+    @Query("DELETE FROM wordDB")
+    suspend fun deleteAllWords()
 
 }

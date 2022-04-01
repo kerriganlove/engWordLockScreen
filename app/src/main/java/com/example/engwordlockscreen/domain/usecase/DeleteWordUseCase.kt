@@ -7,8 +7,8 @@ class DeleteWordUseCase(
     private val repository: WordRepository
 )
 {
-    suspend operator fun invoke(wordEntity : WordEntity)
+    suspend operator fun invoke(s: String)
     {
-        repository.insertWord(wordEntity)
+        repository.deleteSameWords(s)
     }
 }

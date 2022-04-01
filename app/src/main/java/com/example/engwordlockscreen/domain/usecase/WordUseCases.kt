@@ -3,8 +3,9 @@ package com.example.engwordlockscreen.domain.usecase
 import java.util.*
 
 data class WordUseCases(
-    private val deleteWordUseCase: DeleteWordUseCase,
-    private val insertWordUseCase: InsertWordUseCase,
-    private val sameWordUseCase: SameWordUseCase,
-    private val viewListUseCase: ViewListUseCase
+    val deleteWordUseCase: DeleteWordUseCase,
+    val insertWordUseCase: InsertWordUseCase,
+    val sameWordUseCase: SameWordUseCase,
+    val viewListUseCase: ViewListUseCase,
+    val deleteAllWordUseCase: DeleteAllWordUseCase
                        )

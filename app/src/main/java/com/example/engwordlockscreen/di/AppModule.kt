@@ -21,12 +21,11 @@ object AppModule {
     @Singleton
     fun provideWordDatabase(app : Application) : WordDatabase
     {
-        if ( instance == null )
-        {
-            synchronized(WordDatabase::class){
-                instance = Room.databaseBuilder(app, WordDatabase::class.java, DATABASE_NAME)
-                    .build()
-            }
+        synchronized(WordDatabase::class){
+            instance = Room.databaseBuilder(app,
+                                            WordDatabase::class.java,
+                                            DATABASE_NAME)
+                .build()
         }
         return instance
     }
@@ -44,7 +43,8 @@ object AppModule {
             deleteWordUseCase = DeleteWordUseCase(repository),
             insertWordUseCase = InsertWordUseCase(repository),
             sameWordUseCase = SameWordUseCase(repository),
-            viewListUseCase = ViewListUseCase(repository)
+            viewListUseCase = ViewListUseCase(repository),
+            deleteAllWordUseCase = DeleteAllWordUseCase(repository)
                            )
     }
 }

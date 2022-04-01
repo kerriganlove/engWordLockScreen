@@ -25,4 +25,8 @@ class WordRepositoryImpl(
         return dao.deleteSameWords(s)
     }
 
+    override suspend fun deleteAllWords() {
+        return dao.deleteAllWords()
+    }
+
 }

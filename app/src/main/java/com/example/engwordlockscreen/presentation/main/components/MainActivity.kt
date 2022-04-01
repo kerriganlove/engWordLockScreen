@@ -10,14 +10,20 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.adapters.MainViewPagerAdapter
 import com.example.engwordlockscreen.databinding.ActivityMainBinding
 import com.example.engwordlockscreen.presentation.lockscreen.LockScreenService
+import com.example.engwordlockscreen.presentation.word.WordViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
 
+@AndroidEntryPoint
+@WithFragmentBindings
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var getResult : ActivityResultLauncher<Intent>

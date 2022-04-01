@@ -1,14 +1,12 @@
 package com.example.engwordlockscreen.domain.usecase
 
-import com.example.engwordlockscreen.domain.database.WordEntity
 import com.example.engwordlockscreen.domain.repository.WordRepository
 
-class InsertWordUseCase (
+class DeleteAllWordUseCase(
     private val repository: WordRepository)
 {
-
-    suspend operator fun invoke(word : WordEntity)
+    suspend operator fun invoke()
     {
-        repository.insertWord(word)
+        repository.deleteAllWords()
     }
 }

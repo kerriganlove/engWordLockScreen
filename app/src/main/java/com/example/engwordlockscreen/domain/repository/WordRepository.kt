@@ -12,4 +12,6 @@ interface WordRepository {
     suspend fun viewSameWord(s : String) : LiveData<MutableList<WordEntity>>
 
     suspend fun deleteSameWords(s : String)
+
+    suspend fun deleteAllWords()
 }
