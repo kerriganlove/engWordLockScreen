@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.listeners
+package com.example.engwordlockscreen.presentation.utils.listeners
 
 import android.content.Context
 import android.view.GestureDetector

@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.adapters
+package com.example.engwordlockscreen.presentation.utils.recyclerview.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

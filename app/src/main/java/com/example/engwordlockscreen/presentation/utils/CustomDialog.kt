@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.engwordlockscreen.adapters.DialogRecyclerViewAdapter
+import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.DialogRecyclerViewAdapter
 import com.example.engwordlockscreen.domain.database.WordEntity
 import com.example.engwordlockscreen.databinding.CustomDeleteDialogBinding
 import com.example.engwordlockscreen.databinding.CustomWordDialogBinding

@@ -1,9 +1,9 @@
-package com.example.engwordlockscreen.adapters
+package com.example.engwordlockscreen.presentation.utils.recyclerview.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.engwordlockscreen.fragments.*
+import com.example.engwordlockscreen.presentation.fragments.*
 import com.example.engwordlockscreen.presentation.word.components.WordInsertFragment
 import com.example.engwordlockscreen.presentation.word.components.WordListFragment
 

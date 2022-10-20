@@ -10,14 +10,12 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.engwordlockscreen.R
-import com.example.engwordlockscreen.adapters.MainViewPagerAdapter
+import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.MainViewPagerAdapter
 import com.example.engwordlockscreen.databinding.ActivityMainBinding
 import com.example.engwordlockscreen.presentation.lockscreen.LockScreenService
-import com.example.engwordlockscreen.presentation.word.WordViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
@@ -34,17 +32,18 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         setContentView(binding.root)
         init()
     }
-        private fun startModule()
+
+    private fun startModule()
+    {
+        val intent = Intent(applicationContext, LockScreenService::class.java)
+        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent)
+            Log.d("startService","Service")
+        }
+        else
         {
-            val intent = Intent(applicationContext, LockScreenService::class.java)
-            if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(intent)
-                Log.d("startService","Service")
-            }
-            else
-            {
-                startService(intent)
-            }
+            startService(intent)
+        }
     }
 
     private fun checkPermission() {

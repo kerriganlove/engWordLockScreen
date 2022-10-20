@@ -11,9 +11,9 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import com.example.engwordlockscreen.databinding.ActivityLockScreenBinding
-import com.example.engwordlockscreen.fragments.IdiomInsertFragment
-import com.example.engwordlockscreen.fragments.IdiomListFragment
-import com.example.engwordlockscreen.fragments.MultiChoiceFragment
+import com.example.engwordlockscreen.presentation.fragments.IdiomInsertFragment
+import com.example.engwordlockscreen.presentation.fragments.IdiomListFragment
+import com.example.engwordlockscreen.presentation.fragments.MultiChoiceFragment
 
 class LockScreenActivity : AppCompatActivity() {
     private var _binding : ActivityLockScreenBinding? = null

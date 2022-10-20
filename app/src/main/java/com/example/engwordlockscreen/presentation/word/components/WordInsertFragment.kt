@@ -7,21 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.children
-import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.engwordlockscreen.R
-import com.example.engwordlockscreen.data.datasource.WordDatabase
-import com.example.engwordlockscreen.data.repository.WordRepositoryImpl
 import com.example.engwordlockscreen.domain.database.WordEntity
 import com.example.engwordlockscreen.databinding.FragmentWordInsertBinding
-import com.example.engwordlockscreen.domain.repository.WordRepository
-import com.example.engwordlockscreen.domain.usecase.DeleteAllWordUseCase
-import com.example.engwordlockscreen.domain.usecase.WordUseCases
-import com.example.engwordlockscreen.presentation.main.MainViewModel
 import com.example.engwordlockscreen.presentation.utils.StringFilter
 import com.example.engwordlockscreen.presentation.word.WordEvent
 import com.example.engwordlockscreen.presentation.word.WordViewModel
@@ -33,7 +24,6 @@ class WordInsertFragment : Fragment() {
     private var inflater : LayoutInflater? = null
     private var mInflater : LinearLayout? = null
     private var insertView : View? = null
-    private lateinit var wordDB : WordDatabase
     private var viewCount : Int = 0
     private var binding : FragmentWordInsertBinding? = null
     private var wordList = arrayListOf<WordEntity>()
@@ -52,6 +42,9 @@ class WordInsertFragment : Fragment() {
         binding = null
         viewCount = 0
     }
+
+
+
 
     ////////////////////////////////////////// function
 
@@ -89,6 +82,7 @@ class WordInsertFragment : Fragment() {
         }
     }
 
+
     private fun removeForm()
     {
         if ( viewCount > 0) {
@@ -121,7 +115,7 @@ class WordInsertFragment : Fragment() {
                     Toast.makeText(context, "단어 또는 뜻이 없어 추가할 수 없습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
-            if ( !wordList.isEmpty() ) {
+            if (wordList.isNotEmpty()) {
                 insertList(wordList)
             }
             else

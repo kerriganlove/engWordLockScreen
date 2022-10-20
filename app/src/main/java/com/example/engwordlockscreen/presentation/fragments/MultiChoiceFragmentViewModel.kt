@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.fragments
+package com.example.engwordlockscreen.presentation.fragments
 
 import androidx.lifecycle.ViewModel
 

@@ -23,8 +23,8 @@ object AppModule {
     {
         synchronized(WordDatabase::class){
             instance = Room.databaseBuilder(app,
-                                            WordDatabase::class.java,
-                                            DATABASE_NAME)
+                WordDatabase::class.java,
+                DATABASE_NAME)
                 .build()
         }
         return instance
@@ -37,7 +37,7 @@ object AppModule {
     }
     @Provides
     @Singleton
-    fun provideWordUseCases( repository : WordRepository) : WordUseCases
+    fun provideWordUseCases(repository : WordRepository) : WordUseCases
     {
         return WordUseCases(
             deleteWordUseCase = DeleteWordUseCase(repository),

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.IdiomListFragment"
+    tools:context=".presentation.fragments.IdiomListFragment"
     android:background="@color/design_default_color_error">
 
     <TextView
