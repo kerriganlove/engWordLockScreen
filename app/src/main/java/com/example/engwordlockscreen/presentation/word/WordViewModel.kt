@@ -6,6 +6,10 @@ import com.example.engwordlockscreen.domain.database.WordEntity
 import com.example.engwordlockscreen.domain.repository.WordRepository
 import com.example.engwordlockscreen.domain.usecase.WordUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,6 +17,7 @@ import javax.inject.Inject
 class WordViewModel @Inject constructor(
     private val wordUseCases: WordUseCases,
     ) : ViewModel() {
+
     fun onEvent(event: WordEvent) {
         when (event) {
             is WordEvent.Insert -> {
@@ -30,12 +35,14 @@ class WordViewModel @Inject constructor(
                     wordUseCases.sameWordUseCase(event.s)
                 }
             }
+
         }
     }
 
-    fun viewList() = liveData {
-        emit(wordUseCases.viewListUseCase().value)
-    }
+    suspend fun viewList() : Flow<MutableList<WordEntity>> = wordUseCases.viewListUseCase()
+
+
+
     fun deleteAllList()
     {
         viewModelScope.launch {

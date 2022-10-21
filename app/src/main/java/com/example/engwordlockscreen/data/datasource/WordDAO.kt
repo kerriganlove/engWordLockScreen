@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.OnConflictStrategy.ABORT
 import com.example.engwordlockscreen.domain.database.WordEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WordDAO
@@ -21,10 +22,10 @@ interface WordDAO
     suspend fun wordCheck (word : String) : Boolean
 
     @Query("SELECT * FROM wordDB GROUP BY word ORDER BY id")
-    fun viewList() : LiveData<MutableList<WordEntity>>
+    fun viewList() : Flow<MutableList<WordEntity>>
 
     @Query("SELECT * FROM wordDB WHERE word = :s")
-    fun viewSameWord(s : String) : LiveData<MutableList<WordEntity>>
+    fun viewSameWord(s : String) : Flow<MutableList<WordEntity>>
 
     @Query("DELETE FROM wordDB WHERE word = :s")
     suspend fun deleteSameWords(s : String)

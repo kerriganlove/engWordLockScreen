@@ -1,5 +1,6 @@
 package com.example.engwordlockscreen.presentation.utils.recyclerview.viewholder
 
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.example.engwordlockscreen.databinding.ListCustomItemBinding
 import com.example.engwordlockscreen.domain.database.WordEntity
@@ -10,8 +11,8 @@ import com.example.engwordlockscreen.domain.database.WordEntity
  * Click -> Click 시 실행될 함수
  */
 class WordListViewHolder(private val binding : ListCustomItemBinding,
-    private val longClick : () -> Unit,
-    private val click : () -> Unit) :
+    private val longClick : (String, Int) -> Unit,
+    private val click : (String) -> Unit) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(wordEntity : WordEntity) {
@@ -28,13 +29,13 @@ class WordListViewHolder(private val binding : ListCustomItemBinding,
      * initialize Listener
      */
     private fun initListener() {
-        binding.listCustomItem.apply {
+        binding.root.apply {
             setOnLongClickListener {
-                longClick
+                longClick.invoke(binding.listWordTextview.text.toString(),adapterPosition)
                 true
             }
             setOnClickListener {
-                click
+                click.invoke(binding.listWordTextview.toString())
             }
         }
     }

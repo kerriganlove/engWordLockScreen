@@ -1,5 +1,6 @@
 package com.example.engwordlockscreen.presentation.utils.recyclerview.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -10,8 +11,8 @@ import com.example.engwordlockscreen.presentation.utils.recyclerview.diffutil.Wo
 import com.example.engwordlockscreen.presentation.utils.recyclerview.viewholder.WordListViewHolder
 
 class WordListRecyclerViewAdapter(
-    private val longClick : () -> Unit,
-    private val click : () -> Unit
+    private val longClick : (String, Int) -> Unit,
+    private val click : (String) -> Unit
 ) : ListAdapter<WordEntity, RecyclerView.ViewHolder>(diffUtil) {
 
     /*

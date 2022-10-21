@@ -4,18 +4,22 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.WordListRecyclerViewAdapter
 import com.example.engwordlockscreen.presentation.utils.CustomDialog
 import com.example.engwordlockscreen.domain.database.WordEntity
 import com.example.engwordlockscreen.databinding.FragmentWordListBinding
+import com.example.engwordlockscreen.databinding.ListCustomItemBinding
 import com.example.engwordlockscreen.presentation.word.WordEvent
 import com.example.engwordlockscreen.presentation.word.WordViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -28,6 +32,7 @@ class WordListFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModels<WordViewModel>()
     private lateinit var adapter : WordListRecyclerViewAdapter
+    private var list = ArrayList<WordEntity>()
 
     /*
      * LifeCycle Callback
@@ -36,6 +41,7 @@ class WordListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentWordListBinding.inflate(inflater,container,false)
         initView()
+        list.add(WordEntity(0,"","","1234"))
         return binding.root
     }
 
@@ -51,15 +57,29 @@ class WordListFragment : Fragment() {
      */
 
     private fun initAdapter() {
-        adapter = WordListRecyclerViewAdapter( { deleteWord("") }, { selectWord() })
+        adapter = WordListRecyclerViewAdapter(
+            longClick = { s: String, pos: Int ->
+                deleteWord(s, pos)
+            },
+            click = {
+                selectWord(it)
+            }
+        )
+        lifecycleScope.launch {
+            viewModel.viewList().collect {
+                adapter.updateItem(it)
+            }
+        }
+        lifecycleScope.launch {
+
+        }
     }
 
     private fun initView()
     {
         initAdapter()
-        binding!!.wordListRecyclerview.adapter = adapter
-        binding!!.wordListRecyclerview.layoutManager = LinearLayoutManager(activity)
-        selectList()
+        binding.wordListRecyclerview.adapter = adapter
+        binding.wordListRecyclerview.layoutManager = LinearLayoutManager(this.context)
     }
 
     /*
@@ -67,21 +87,15 @@ class WordListFragment : Fragment() {
      * 데이터 관리 함수.
      */
 
-    private fun selectList() {
-        viewModel.viewList().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            adapter.updateItem(it!!)
-        })
-    }
     private fun selectWord(s : String)
     {
         viewModel.onEvent(WordEvent.SameWord(s))
-        lifecycleScope.launch {
-            var dlg = CustomDialog(requireContext())
-            dlg.wordListFunction(wordList)
-        }
+
+
     }
     private fun deleteWord(s : String, pos : Int)
     {
-        viewModel.onEvent(WordEvent.Delete(s))
+
+         viewModel.onEvent(WordEvent.Delete(s))
     }
 }
