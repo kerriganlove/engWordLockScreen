@@ -11,7 +11,7 @@ import com.example.engwordlockscreen.presentation.utils.recyclerview.diffutil.Wo
 import com.example.engwordlockscreen.presentation.utils.recyclerview.viewholder.WordListViewHolder
 
 class WordListRecyclerViewAdapter(
-    private val longClick : (String, Int) -> Unit,
+    private val longClick : (String) -> Unit,
     private val click : (String) -> Unit
 ) : ListAdapter<WordEntity, RecyclerView.ViewHolder>(diffUtil) {
 

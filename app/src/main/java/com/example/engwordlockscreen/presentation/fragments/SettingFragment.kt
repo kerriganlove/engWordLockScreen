@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.engwordlockscreen.databinding.FragmentSettingBinding
+import com.example.engwordlockscreen.presentation.word.WordEvent
 import com.example.engwordlockscreen.presentation.word.WordViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +31,6 @@ class SettingFragment : Fragment() {
     }
     private fun clearDB()
     {
-        viewModel.deleteAllList()
+        viewModel.onEvent(WordEvent.DeleteAll)
     }
 }

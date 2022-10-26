@@ -11,7 +11,7 @@ import com.example.engwordlockscreen.domain.database.WordEntity
  * Click -> Click 시 실행될 함수
  */
 class WordListViewHolder(private val binding : ListCustomItemBinding,
-    private val longClick : (String, Int) -> Unit,
+    private val longClick : (String) -> Unit,
     private val click : (String) -> Unit) :
     RecyclerView.ViewHolder(binding.root) {
 
@@ -31,11 +31,11 @@ class WordListViewHolder(private val binding : ListCustomItemBinding,
     private fun initListener() {
         binding.root.apply {
             setOnLongClickListener {
-                longClick.invoke(binding.listWordTextview.text.toString(),adapterPosition)
+                longClick.invoke(binding.listWordTextview.text.toString())
                 true
             }
             setOnClickListener {
-                click.invoke(binding.listWordTextview.toString())
+                click.invoke(binding.listWordTextview.text.toString())
             }
         }
     }

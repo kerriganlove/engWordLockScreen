@@ -15,6 +15,8 @@ class LoadingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_loading)
         startLoading()
     }
+
+    // TODO 권한 관련 팝업 만들기.
     private fun startLoading()
     {
         val intent = Intent(application, MainActivity::class.java)

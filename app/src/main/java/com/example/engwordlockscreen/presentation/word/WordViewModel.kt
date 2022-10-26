@@ -1,15 +1,10 @@
 package com.example.engwordlockscreen.presentation.word
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.engwordlockscreen.domain.database.WordEntity
-import com.example.engwordlockscreen.domain.repository.WordRepository
 import com.example.engwordlockscreen.domain.usecase.WordUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,23 +25,15 @@ class WordViewModel @Inject constructor(
                     wordUseCases.deleteWordUseCase(event.s)
                 }
             }
-            is WordEvent.SameWord -> {
+            is WordEvent.DeleteAll -> {
                 viewModelScope.launch {
-                    wordUseCases.sameWordUseCase(event.s)
+                    wordUseCases.deleteAllWordUseCase()
                 }
             }
-
         }
     }
 
-    suspend fun viewList() : Flow<MutableList<WordEntity>> = wordUseCases.viewListUseCase()
+    suspend fun viewList() : StateFlow<MutableList<WordEntity>> = wordUseCases.viewListUseCase().stateIn(viewModelScope)
 
-
-
-    fun deleteAllList()
-    {
-        viewModelScope.launch {
-            wordUseCases.deleteAllWordUseCase()
-        }
-    }
+    suspend fun viewSameWord(s : String) : StateFlow<MutableList<WordEntity>> = wordUseCases.sameWordUseCase(s).stateIn(viewModelScope)
 }

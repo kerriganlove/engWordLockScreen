@@ -7,5 +7,5 @@ sealed class WordEvent
 {
     data class Insert(val w : WordEntity) : WordEvent()
     data class Delete(val s : String) : WordEvent()
-    data class SameWord(val s : String) : WordEvent()
+    object DeleteAll : WordEvent()
 }
