@@ -14,12 +14,14 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.WordListRecyclerViewAdapter
 import com.example.engwordlockscreen.databinding.FragmentWordListBinding
+import com.example.engwordlockscreen.domain.database.WordEntity
 import com.example.engwordlockscreen.presentation.utils.dialogs.CustomDialog
 import com.example.engwordlockscreen.presentation.word.WordEvent
 import com.example.engwordlockscreen.presentation.word.WordViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newFixedThreadPoolContext
 
@@ -89,16 +91,13 @@ class WordListFragment : Fragment() {
     // TODO Collect, First 정확한 사용법 익히기
     private fun selectWord(s : String)
     {
+        var wordlist = mutableListOf<WordEntity>()
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.viewSameWord(s).first {
-                    dlgUtil.wordListFunction(it)
-                    true
-                }
-            }
+            wordlist = viewModel.viewSameWord(s).first()
+            dlgUtil.wordListFunction(wordlist)
         }
     }
-    private fun deleteWord(s : String)
+    private fun deleteWord(s: String)
     {
         dlgUtil.wordDeleteFunction { viewModel.onEvent(WordEvent.Delete(s)) }
     }

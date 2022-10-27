@@ -8,13 +8,13 @@ import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.DialogRecyclerViewAdapter
 import com.example.engwordlockscreen.domain.database.WordEntity
-import com.example.engwordlockscreen.databinding.CustomDeleteDialogBinding
+import com.example.engwordlockscreen.databinding.CustomGeneralDialogBinding
 import com.example.engwordlockscreen.databinding.CustomWordDialogBinding
 
 class CustomDialog(val context: Context)
 {
     lateinit var binding : CustomWordDialogBinding
-    lateinit var deleteBinding : CustomDeleteDialogBinding
+    lateinit var deleteBinding : CustomGeneralDialogBinding
 
     fun wordListFunction(wordList : MutableList<WordEntity>)
     {
@@ -39,7 +39,7 @@ class CustomDialog(val context: Context)
     fun wordDeleteFunction(click : () -> Unit)
     {
         val dlg = Dialog(context)
-        deleteBinding = CustomDeleteDialogBinding.inflate(LayoutInflater.from(context))
+        deleteBinding = CustomGeneralDialogBinding.inflate(LayoutInflater.from(context))
         dlg.setContentView(deleteBinding.root)
         val dlgWin = WindowManager.LayoutParams()
         dlgWin.copyFrom(dlg.window!!.attributes)
@@ -51,6 +51,26 @@ class CustomDialog(val context: Context)
         deleteBinding.deleteOkButton.setOnClickListener {
             click.invoke()
             dlg.dismiss()
+        }
+        deleteBinding.deleteCancelButton.setOnClickListener {
+            dlg.dismiss()
+        }
+    }
+
+    fun checkPermissionDialog(click : () -> Unit) {
+        val dlg = Dialog(context)
+        deleteBinding = CustomGeneralDialogBinding.inflate(LayoutInflater.from(context))
+        dlg.setContentView(deleteBinding.root)
+        val dlgWin = WindowManager.LayoutParams()
+        dlgWin.copyFrom(dlg.window!!.attributes)
+        dlgWin.width = WindowManager.LayoutParams.MATCH_PARENT
+        dlgWin.height = WindowManager.LayoutParams.WRAP_CONTENT
+        val window = dlg.window
+        window!!.attributes = dlgWin
+        dlg.show()
+        deleteBinding.deleteOkButton.setOnClickListener {
+            dlg.dismiss()
+            click.invoke()
         }
         deleteBinding.deleteCancelButton.setOnClickListener {
             dlg.dismiss()
