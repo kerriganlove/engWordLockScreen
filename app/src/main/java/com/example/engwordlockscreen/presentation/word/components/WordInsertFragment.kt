@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.domain.database.WordEntity
@@ -27,7 +27,7 @@ class WordInsertFragment : Fragment() {
     private var viewCount : Int = 0
     private var binding : FragmentWordInsertBinding? = null
     private var wordList = arrayListOf<WordEntity>()
-    private val viewModel by viewModels<WordViewModel>()
+    private val viewModel by activityViewModels<WordViewModel>()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

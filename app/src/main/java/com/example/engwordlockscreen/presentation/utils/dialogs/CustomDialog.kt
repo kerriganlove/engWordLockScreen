@@ -1,5 +1,6 @@
 package com.example.engwordlockscreen.presentation.utils.dialogs
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.util.Log
@@ -36,6 +37,10 @@ class CustomDialog(val context: Context)
         }
     }
 
+    fun alertPermissionDialog( click : () -> Unit ) {
+
+    }
+
     fun wordDeleteFunction(click : () -> Unit)
     {
         val dlg = Dialog(context)
@@ -49,8 +54,10 @@ class CustomDialog(val context: Context)
         window!!.attributes = dlgWin
         dlg.show()
         deleteBinding.deleteOkButton.setOnClickListener {
-            click.invoke()
             dlg.dismiss()
+            if ( !dlg.isShowing) {
+                click.invoke()
+            }
         }
         deleteBinding.deleteCancelButton.setOnClickListener {
             dlg.dismiss()

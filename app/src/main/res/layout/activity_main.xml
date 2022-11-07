@@ -5,26 +5,29 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.main.components.MainActivity">
+
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/main_toolbar"
         android:background="@color/main_theme_blue">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="20dp"
             android:text="@string/main_title"
             android:textColor="@color/white"
-            android:textStyle="bold"/>
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
+
     <LinearLayout
+        android:id="@+id/toolbar_division"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:orientation="horizontal"
-        android:id="@+id/toolbar_division"
-        android:layout_below="@+id/main_toolbar"/>
+        android:layout_below="@+id/main_toolbar"
+        android:orientation="horizontal" />
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="match_parent"

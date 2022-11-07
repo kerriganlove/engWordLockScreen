@@ -1,14 +1,12 @@
 package com.example.engwordlockscreen.presentation.word.components
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,9 +19,7 @@ import com.example.engwordlockscreen.presentation.word.WordViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.newFixedThreadPoolContext
 
 @AndroidEntryPoint
 class WordListFragment : Fragment() {
@@ -33,7 +29,7 @@ class WordListFragment : Fragment() {
      */
     private var _binding : FragmentWordListBinding? = null
     private val binding get() = _binding!!
-    private val viewModel by viewModels<WordViewModel>()
+    private val viewModel by activityViewModels<WordViewModel>()
     private lateinit var adapter : WordListRecyclerViewAdapter
     private val dlgUtil by lazy { CustomDialog(requireContext())}
 
@@ -91,9 +87,8 @@ class WordListFragment : Fragment() {
     // TODO Collect, First 정확한 사용법 익히기
     private fun selectWord(s : String)
     {
-        var wordlist = mutableListOf<WordEntity>()
         viewLifecycleOwner.lifecycleScope.launch {
-            wordlist = viewModel.viewSameWord(s).first()
+            var wordlist = viewModel.viewSameWord(s).first()
             dlgUtil.wordListFunction(wordlist)
         }
     }

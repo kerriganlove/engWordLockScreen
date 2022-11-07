@@ -24,8 +24,6 @@ import dagger.hilt.android.WithFragmentBindings
 @WithFragmentBindings
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private lateinit var getResult : ActivityResultLauncher<Intent>
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,60 +31,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         init()
     }
 
-    private fun startModule()
-    {
-        val intent = Intent(applicationContext, LockScreenService::class.java)
-        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(intent)
-            Log.d("startService","Service")
-        }
-        else
-        {
-            startService(intent)
-        }
-    }
-
-    private fun checkPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
-            if (!Settings.canDrawOverlays(this))
-            {
-                var uri = Uri.fromParts("package", packageName, null)
-                val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, uri)
-                getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-                {
-                    if ( it.resultCode == RESULT_CANCELED)
-                    {
-                        if (!Settings.canDrawOverlays(this))
-                        {
-                            Toast.makeText(this,"반드시 동의하셔야만 합니다.",Toast.LENGTH_LONG).show()
-                        }
-                    }
-                    else
-                    {
-                        startModule()
-                    }
-                }
-                getResult.launch(intent)
-            }
-            else
-            {
-                startModule()
-            }
-        }
-        else
-        {
-            startModule()
-        }
-    }
     private fun init()
     {
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(this)
         binding.mainBottomNavigation.selectedItemId = R.id.action_word_insert
         binding.mainViewPager.adapter = MainViewPagerAdapter(this)
         binding.mainViewPager.registerOnPageChangeCallback(PageChangeCallBack())
-        checkPermission()
+        binding.mainViewPager.offscreenPageLimit = 5
     }
+
     private inner class PageChangeCallBack : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
