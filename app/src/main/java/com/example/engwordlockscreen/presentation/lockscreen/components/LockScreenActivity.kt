@@ -3,21 +3,31 @@ package com.example.engwordlockscreen.presentation.lockscreen.components
 import android.app.KeyguardManager
 import android.content.Context
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.engwordlockscreen.databinding.ActivityLockScreenBinding
-import com.example.engwordlockscreen.presentation.fragments.IdiomInsertFragment
-import com.example.engwordlockscreen.presentation.fragments.IdiomListFragment
-import com.example.engwordlockscreen.presentation.fragments.MultiChoiceFragment
+import com.example.engwordlockscreen.presentation.quiz.QuizViewModel
+import com.example.engwordlockscreen.presentation.quiz.components.MultiChoiceFragment
+import com.example.engwordlockscreen.presentation.quiz.components.PuzzleFragment
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
 
+@AndroidEntryPoint
+@WithFragmentBindings
 class LockScreenActivity : AppCompatActivity() {
     private var _binding : ActivityLockScreenBinding? = null
     private val binding get() = _binding!!
+    override fun onStart() {
+        super.onStart()
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityLockScreenBinding.inflate(layoutInflater)
@@ -30,7 +40,7 @@ class LockScreenActivity : AppCompatActivity() {
         binding.screenOffButton.setOnClickListener {
             finish()
         }
-        val num = intent.getIntExtra("quizUI",4)
+        val num = intent.getIntExtra("quizUI",0)
         val fragment = quizChoice(num)
         val sfm = supportFragmentManager.beginTransaction()
         sfm.replace(binding.quizFragments.id,fragment).commit()
@@ -38,9 +48,8 @@ class LockScreenActivity : AppCompatActivity() {
     private fun quizChoice(num : Int) : Fragment {
         var fragment = when(num)
         {
-            0 -> IdiomListFragment()
-            1 -> IdiomInsertFragment()
-            2 -> MultiChoiceFragment()
+            0 -> MultiChoiceFragment()
+            1 -> PuzzleFragment()
             else -> error("quizError")
         }
         return fragment

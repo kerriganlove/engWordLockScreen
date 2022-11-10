@@ -24,7 +24,7 @@ class LockScreenService : Service()
                         val lockIntent = Intent(applicationContext, LockScreenActivity::class.java)
                         lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         val secureRandom = SecureRandom()
-                        val quizNum = secureRandom.nextInt(3)
+                        val quizNum = secureRandom.nextInt(2)
                         lockIntent.putExtra("quizUI",quizNum)
                         Log.d("Hi","LockscreenService On")
                         startActivity(lockIntent)
@@ -56,14 +56,12 @@ class LockScreenService : Service()
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val filter = IntentFilter().apply { addAction(Intent.ACTION_SCREEN_OFF) }
         registerReceiver(receiver,filter)
-        return super.onStartCommand(intent, flags, startId)
 
-        return Service.START_STICKY
+        return START_STICKY
     } // Service가 Activity와 같은 Controller에서 시작하도록 했을 경우.
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("serivceDown","Hi")
         unregisterReceiver(receiver)
     }
 }

@@ -1,6 +1,5 @@
-package com.example.engwordlockscreen.domain.usecase
+package com.example.engwordlockscreen.domain.usecase.wordusecases
 
-import androidx.lifecycle.LiveData
 import com.example.engwordlockscreen.domain.database.WordEntity
 import com.example.engwordlockscreen.domain.repository.WordRepository
 import kotlinx.coroutines.flow.Flow

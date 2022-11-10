@@ -4,9 +4,12 @@ import android.app.Application
 import androidx.room.Room
 import com.example.engwordlockscreen.data.datasource.WordDatabase
 import com.example.engwordlockscreen.data.datasource.WordDatabase.Companion.DATABASE_NAME
+import com.example.engwordlockscreen.data.repository.QuizRepositoryImpl
 import com.example.engwordlockscreen.data.repository.WordRepositoryImpl
+import com.example.engwordlockscreen.domain.repository.QuizRepository
 import com.example.engwordlockscreen.domain.repository.WordRepository
-import com.example.engwordlockscreen.domain.usecase.*
+import com.example.engwordlockscreen.domain.usecase.quizusecases.*
+import com.example.engwordlockscreen.domain.usecase.wordusecases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,6 +34,11 @@ object AppModule {
     }
     @Provides
     @Singleton
+    fun provideQuizRepository(db : WordDatabase) : QuizRepository {
+        return QuizRepositoryImpl(db.wordDAO())
+    }
+    @Provides
+    @Singleton
     fun provideWordRepository(db : WordDatabase) : WordRepository
     {
         return WordRepositoryImpl(db.wordDAO())
@@ -46,5 +54,13 @@ object AppModule {
             viewListUseCase = ViewListUseCase(repository),
             deleteAllWordUseCase = DeleteAllWordUseCase(repository)
                            )
+    }
+    @Provides
+    @Singleton
+    fun provideQuizUseCases(repository : QuizRepository) : QuizUseCases {
+        return QuizUseCases(
+            multiChoiceUseCase = MultiChoiceUseCase(repository),
+            puzzleUseCases = PuzzleUseCases(repository)
+        )
     }
 }

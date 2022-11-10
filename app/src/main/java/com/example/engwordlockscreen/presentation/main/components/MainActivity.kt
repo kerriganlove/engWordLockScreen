@@ -15,6 +15,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.MainViewPagerAdapter
 import com.example.engwordlockscreen.databinding.ActivityMainBinding
+import com.example.engwordlockscreen.databinding.FragmentWordListBinding
 import com.example.engwordlockscreen.presentation.lockscreen.LockScreenService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,10 +24,13 @@ import dagger.hilt.android.WithFragmentBindings
 @AndroidEntryPoint
 @WithFragmentBindings
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
+    private var _binding : ActivityMainBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
     }

@@ -1,6 +1,4 @@
-package com.example.engwordlockscreen.domain.usecase
-
-import java.util.*
+package com.example.engwordlockscreen.domain.usecase.wordusecases
 
 data class WordUseCases(
     val deleteWordUseCase: DeleteWordUseCase,

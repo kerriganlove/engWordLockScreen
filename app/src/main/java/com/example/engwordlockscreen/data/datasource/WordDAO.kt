@@ -33,4 +33,10 @@ interface WordDAO
     @Query("DELETE FROM wordDB")
     suspend fun deleteAllWords()
 
+    @Query("SELECT * FROM wordDB GROUP BY word ORDER BY RANDOM() LIMIT 9")
+    fun getListByMultiChoiceQuiz() : Flow<MutableList<WordEntity>>
+
+    @Query("SELECT * FROM wordDB GROUP BY word ORDER BY RANDOM() LIMIT 5")
+    fun getListByPuzzleQuiz(): Flow<MutableList<WordEntity>>
+
 }

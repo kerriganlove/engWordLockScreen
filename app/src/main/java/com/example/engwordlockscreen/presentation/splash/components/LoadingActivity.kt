@@ -70,7 +70,6 @@ class LoadingActivity : AppCompatActivity() {
         val intent = Intent(applicationContext, LockScreenService::class.java)
         if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intent)
-            Log.d("startService","Service")
         }
         else
         {
