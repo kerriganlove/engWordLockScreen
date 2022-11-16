@@ -1,7 +1,6 @@
 package com.example.engwordlockscreen.presentation.word
 
-import androidx.lifecycle.LiveData
-import com.example.engwordlockscreen.domain.database.WordEntity
+import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 
 sealed class WordEvent
 {

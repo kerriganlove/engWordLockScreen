@@ -1,9 +1,8 @@
-package com.example.engwordlockscreen.data.datasource
+package com.example.engwordlockscreen.data.datasource.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.OnConflictStrategy.ABORT
-import com.example.engwordlockscreen.domain.database.WordEntity
+import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

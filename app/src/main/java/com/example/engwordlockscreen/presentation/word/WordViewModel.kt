@@ -1,7 +1,7 @@
 package com.example.engwordlockscreen.presentation.word
 
 import androidx.lifecycle.*
-import com.example.engwordlockscreen.domain.database.WordEntity
+import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 import com.example.engwordlockscreen.domain.usecase.wordusecases.WordUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*

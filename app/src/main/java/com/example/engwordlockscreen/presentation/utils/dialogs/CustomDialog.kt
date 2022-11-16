@@ -1,6 +1,5 @@
 package com.example.engwordlockscreen.presentation.utils.dialogs
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.util.Log
@@ -8,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.DialogRecyclerViewAdapter
-import com.example.engwordlockscreen.domain.database.WordEntity
+import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 import com.example.engwordlockscreen.databinding.CustomGeneralDialogBinding
 import com.example.engwordlockscreen.databinding.CustomWordDialogBinding
 

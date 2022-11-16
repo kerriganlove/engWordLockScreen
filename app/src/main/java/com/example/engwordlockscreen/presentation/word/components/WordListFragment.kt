@@ -12,7 +12,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.WordListRecyclerViewAdapter
 import com.example.engwordlockscreen.databinding.FragmentWordListBinding
-import com.example.engwordlockscreen.domain.database.WordEntity
 import com.example.engwordlockscreen.presentation.utils.dialogs.CustomDialog
 import com.example.engwordlockscreen.presentation.word.WordEvent
 import com.example.engwordlockscreen.presentation.word.WordViewModel

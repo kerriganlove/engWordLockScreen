@@ -1,9 +1,7 @@
 package com.example.engwordlockscreen.domain.repository
 
-import androidx.lifecycle.LiveData
-import com.example.engwordlockscreen.domain.database.WordEntity
+import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 
 interface WordRepository {
 

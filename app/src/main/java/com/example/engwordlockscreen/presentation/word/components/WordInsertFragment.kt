@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.engwordlockscreen.R
-import com.example.engwordlockscreen.domain.database.WordEntity
+import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 import com.example.engwordlockscreen.databinding.FragmentWordInsertBinding
 import com.example.engwordlockscreen.presentation.utils.StringFilter
 import com.example.engwordlockscreen.presentation.word.WordEvent

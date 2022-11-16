@@ -1,7 +1,7 @@
 package com.example.engwordlockscreen.presentation.utils.recyclerview.diffutil
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.engwordlockscreen.domain.database.WordEntity
+import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 
 class WordListDiffUtil : DiffUtil.ItemCallback<WordEntity>() {
     override fun areItemsTheSame(oldItem: WordEntity, newItem: WordEntity): Boolean {

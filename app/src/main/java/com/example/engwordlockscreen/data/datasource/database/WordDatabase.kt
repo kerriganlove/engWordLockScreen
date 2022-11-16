@@ -1,10 +1,8 @@
-package com.example.engwordlockscreen.data.datasource
+package com.example.engwordlockscreen.data.datasource.database
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.engwordlockscreen.domain.database.WordEntity
+import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 
 @Database(entities = [WordEntity::class], version = 1)
 abstract class WordDatabase : RoomDatabase()

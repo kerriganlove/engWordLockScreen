@@ -1,13 +1,12 @@
 package com.example.engwordlockscreen.data.repository
 
-import androidx.lifecycle.LiveData
-import com.example.engwordlockscreen.data.datasource.WordDAO
-import com.example.engwordlockscreen.domain.database.WordEntity
+import com.example.engwordlockscreen.data.datasource.database.WordDAO
+import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 import com.example.engwordlockscreen.domain.repository.WordRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class WordRepositoryImpl(
+class WordRepositoryImpl @Inject constructor(
     private val dao : WordDAO
     ) : WordRepository {
 

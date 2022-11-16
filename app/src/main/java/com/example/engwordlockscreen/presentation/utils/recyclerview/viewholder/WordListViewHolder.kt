@@ -1,9 +1,8 @@
 package com.example.engwordlockscreen.presentation.utils.recyclerview.viewholder
 
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.example.engwordlockscreen.databinding.ListCustomItemBinding
-import com.example.engwordlockscreen.domain.database.WordEntity
+import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 
 /*
  * 단어 목록 RecyclerView 뷰홀더

@@ -1,12 +1,11 @@
 package com.example.engwordlockscreen.presentation.utils.recyclerview.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.engwordlockscreen.databinding.ListCustomItemBinding
-import com.example.engwordlockscreen.domain.database.WordEntity
+import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 import com.example.engwordlockscreen.presentation.utils.recyclerview.diffutil.WordListDiffUtil
 import com.example.engwordlockscreen.presentation.utils.recyclerview.viewholder.WordListViewHolder
 
