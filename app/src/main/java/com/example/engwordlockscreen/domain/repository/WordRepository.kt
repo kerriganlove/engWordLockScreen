@@ -9,9 +9,9 @@ interface WordRepository {
 
     suspend fun insertWord(wordEntity: WordEntities)
 
-    suspend fun viewList() : Flow<MutableList<WordEntities>>
+    suspend fun viewList() : Flow<List<WordEntities>>
 
-    suspend fun viewSameWord(s : String) : Flow<MutableList<WordEntities>>
+    suspend fun viewSameWord(s : String) : Flow<List<WordEntities>>
 
     suspend fun deleteSameWords(s : String)
 

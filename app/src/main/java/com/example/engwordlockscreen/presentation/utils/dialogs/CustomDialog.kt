@@ -6,17 +6,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.DialogRecyclerViewAdapter
-import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 import com.example.engwordlockscreen.databinding.CustomGeneralDialogBinding
 import com.example.engwordlockscreen.databinding.CustomWordDialogBinding
+import com.example.engwordlockscreen.domain.database.WordEntities
+import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.DialogRecyclerViewAdapter
 
 class CustomDialog(val context: Context)
 {
     lateinit var binding : CustomWordDialogBinding
     lateinit var deleteBinding : CustomGeneralDialogBinding
 
-    fun wordListFunction(wordList : MutableList<WordEntity>)
+    fun wordListFunction(wordList : List<WordEntities>)
     {
         val dlg = Dialog(context)
         binding = CustomWordDialogBinding.inflate(LayoutInflater.from(context))

@@ -8,7 +8,7 @@ class SameWordUseCase(
     private val repository: WordRepository
 )
 {
-    suspend operator fun invoke(s : String) : Flow<MutableList<WordEntities>>
+    suspend operator fun invoke(s : String) : Flow<List<WordEntities>>
     {
         return repository.viewSameWord(s)
     }

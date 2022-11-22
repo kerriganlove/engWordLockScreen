@@ -2,7 +2,7 @@ package com.example.engwordlockscreen.presentation.utils.recyclerview.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.engwordlockscreen.databinding.ListCustomItemBinding
-import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
+import com.example.engwordlockscreen.domain.database.WordEntities
 
 /*
  * 단어 목록 RecyclerView 뷰홀더
@@ -14,7 +14,7 @@ class WordListViewHolder(private val binding : ListCustomItemBinding,
     private val click : (String) -> Unit) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(wordEntity : WordEntity) {
+    fun bind(wordEntity : WordEntities) {
         binding.apply {
             listWordTextview.text = wordEntity.word
             listMeanTextview.text = wordEntity.mean

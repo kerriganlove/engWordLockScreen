@@ -17,11 +17,11 @@ class WordRepositoryImpl @Inject constructor(
         localRepository.insertWord(wordEntity)
     }
 
-    override suspend fun viewList(): Flow<MutableList<WordEntities>> {
+    override suspend fun viewList(): Flow<List<WordEntities>> {
        return localRepository.viewList()
     }
 
-    override suspend fun viewSameWord(s: String): Flow<MutableList<WordEntities>> {
+    override suspend fun viewSameWord(s: String): Flow<List<WordEntities>> {
         return localRepository.viewSameWord(s)
     }
 

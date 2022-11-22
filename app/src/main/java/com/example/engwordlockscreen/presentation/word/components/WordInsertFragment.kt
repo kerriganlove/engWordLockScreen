@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 import com.example.engwordlockscreen.databinding.FragmentWordInsertBinding
+import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.presentation.utils.StringFilter
 import com.example.engwordlockscreen.presentation.word.WordEvent
 import com.example.engwordlockscreen.presentation.word.WordViewModel
@@ -26,7 +27,7 @@ class WordInsertFragment : Fragment() {
     private var insertView : View? = null
     private var viewCount : Int = 0
     private var binding : FragmentWordInsertBinding? = null
-    private var wordList = arrayListOf<WordEntity>()
+    private var wordList = arrayListOf<WordEntities>()
     private val viewModel by activityViewModels<WordViewModel>()
 
 
@@ -108,7 +109,7 @@ class WordInsertFragment : Fragment() {
                         ?.findViewById<Spinner>(R.id.insert_form_spinner)
                 val mean = meanId?.text.toString()
                 val part = partId?.selectedItem.toString()
-                val wordEntity = WordEntity(0, word, part, mean)
+                val wordEntity = WordEntities(0, word, part, mean)
                 if (mean != "" && word != "") {
                     wordList.add(wordEntity)
                 } else {
@@ -125,7 +126,7 @@ class WordInsertFragment : Fragment() {
         }
     }
 
-    private fun insertList(wordEntity: ArrayList<WordEntity>)
+    private fun insertList(wordEntity: ArrayList<WordEntities>)
     {
         for ( i in wordEntity.indices)
         {

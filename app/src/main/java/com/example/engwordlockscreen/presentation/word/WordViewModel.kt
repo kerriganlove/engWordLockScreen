@@ -2,6 +2,7 @@ package com.example.engwordlockscreen.presentation.word
 
 import androidx.lifecycle.*
 import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
+import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.domain.usecase.wordusecases.WordUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -33,7 +34,7 @@ class WordViewModel @Inject constructor(
         }
     }
 
-    suspend fun viewList() : StateFlow<MutableList<WordEntity>> = wordUseCases.viewListUseCase().stateIn(viewModelScope)
+    suspend fun viewList() : StateFlow<List<WordEntities>> = wordUseCases.viewListUseCase().stateIn(viewModelScope)
 
-    suspend fun viewSameWord(s : String) : StateFlow<MutableList<WordEntity>> = wordUseCases.sameWordUseCase(s).stateIn(viewModelScope)
+    suspend fun viewSameWord(s : String) : StateFlow<List<WordEntities>> = wordUseCases.sameWordUseCase(s).stateIn(viewModelScope)
 }

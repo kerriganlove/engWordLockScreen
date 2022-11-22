@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.engwordlockscreen.databinding.ListCustomItemBinding
 import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
+import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.presentation.utils.recyclerview.diffutil.WordListDiffUtil
 import com.example.engwordlockscreen.presentation.utils.recyclerview.viewholder.WordListViewHolder
 
 class WordListRecyclerViewAdapter(
     private val longClick : (String) -> Unit,
     private val click : (String) -> Unit
-) : ListAdapter<WordEntity, RecyclerView.ViewHolder>(diffUtil) {
+) : ListAdapter<WordEntities, RecyclerView.ViewHolder>(diffUtil) {
 
     /*
      * Values
@@ -46,7 +47,7 @@ class WordListRecyclerViewAdapter(
      * 데이터 리스트 처리 함수
      */
 
-    fun updateItem(list : MutableList<WordEntity>) {
+    fun updateItem(list : List<WordEntities>) {
         submitList(list)
     }
 }

@@ -5,8 +5,10 @@ import com.example.engwordlockscreen.constants.Response
 import com.example.engwordlockscreen.data.datasource.remote.ApiService
 import com.example.engwordlockscreen.data.datasource.remote.dto.toWordApiModel
 import com.example.engwordlockscreen.domain.remote.WordApiModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -29,6 +31,6 @@ class ApiRepositoryImpl @Inject constructor(
         catch (e : IOException) {
             emit(Response.Error(CustomConst.ERROR_BY_NETWORK))
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
 }

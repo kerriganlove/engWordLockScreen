@@ -1,18 +1,19 @@
 package com.example.engwordlockscreen.presentation.word.components
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.WordListRecyclerViewAdapter
 import com.example.engwordlockscreen.databinding.FragmentWordListBinding
 import com.example.engwordlockscreen.presentation.utils.dialogs.CustomDialog
+import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.WordListRecyclerViewAdapter
 import com.example.engwordlockscreen.presentation.word.WordEvent
 import com.example.engwordlockscreen.presentation.word.WordViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +42,6 @@ class WordListFragment : Fragment() {
         initView()
         return binding.root
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

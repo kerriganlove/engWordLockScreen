@@ -21,10 +21,10 @@ interface WordDAO
     suspend fun wordCheck (word : String) : Boolean
 
     @Query("SELECT * FROM wordDB GROUP BY word ORDER BY id")
-    fun viewList() : MutableList<WordEntity>
+    fun viewList() : Flow<List<WordEntity>>
 
     @Query("SELECT * FROM wordDB WHERE word = :s")
-    fun viewSameWord(s : String) : MutableList<WordEntity>
+    fun viewSameWord(s : String) : Flow<List<WordEntity>>
 
     @Query("DELETE FROM wordDB WHERE word = :s")
     suspend fun deleteSameWords(s : String)
@@ -33,9 +33,9 @@ interface WordDAO
     suspend fun deleteAllWords()
 
     @Query("SELECT * FROM wordDB GROUP BY word ORDER BY RANDOM() LIMIT 9")
-    fun getListByMultiChoiceQuiz() : MutableList<WordEntity>
+    fun getListByMultiChoiceQuiz() : Flow<List<WordEntity>>
 
     @Query("SELECT * FROM wordDB GROUP BY word ORDER BY RANDOM() LIMIT 5")
-    fun getListByPuzzleQuiz(): MutableList<WordEntity>
+    fun getListByPuzzleQuiz(): Flow<List<WordEntity>>
 
 }

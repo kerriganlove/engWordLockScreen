@@ -47,7 +47,7 @@ object AppModule {
     @Singleton
     fun provideWordApiService() : ApiService {
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("https://www.naver.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)

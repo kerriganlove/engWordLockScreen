@@ -8,7 +8,7 @@ class ViewListUseCase(
     private val repository: WordRepository
 )
 {
-    suspend operator fun invoke() : Flow<MutableList<WordEntities>>
+    suspend operator fun invoke() : Flow<List<WordEntities>>
     {
         return repository.viewList()
     }

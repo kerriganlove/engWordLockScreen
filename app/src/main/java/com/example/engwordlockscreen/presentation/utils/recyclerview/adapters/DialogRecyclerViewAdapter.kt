@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 import com.example.engwordlockscreen.databinding.DialogCustomItemBinding
+import com.example.engwordlockscreen.domain.database.WordEntities
 
-class DialogRecyclerViewAdapter(wordList : MutableList<WordEntity>, context : Context) : RecyclerView.Adapter<DialogRecyclerViewAdapter.CustomViewHolder>()
+class DialogRecyclerViewAdapter(wordList : List<WordEntities>, context : Context) : RecyclerView.Adapter<DialogRecyclerViewAdapter.CustomViewHolder>()
 {
     inner class CustomViewHolder(var viewBinding : DialogCustomItemBinding) : RecyclerView.ViewHolder(viewBinding.root)
 
