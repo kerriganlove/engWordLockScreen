@@ -5,8 +5,12 @@ import androidx.room.Room
 import com.example.engwordlockscreen.data.datasource.database.WordDatabase
 import com.example.engwordlockscreen.data.datasource.database.WordDatabase.Companion.DATABASE_NAME
 import com.example.engwordlockscreen.data.datasource.remote.ApiService
-import com.example.engwordlockscreen.data.repository.QuizRepositoryImpl
 import com.example.engwordlockscreen.data.repository.WordRepositoryImpl
+import com.example.engwordlockscreen.data.repository.remote.ApiRepositoryImpl
+import com.example.engwordlockscreen.data.repository.local.QuizRepositoryImpl
+import com.example.engwordlockscreen.data.repository.local.LocalWordRepositoryImpl
+import com.example.engwordlockscreen.data.repository.remote.ApiRepository
+import com.example.engwordlockscreen.data.repository.local.LocalWordRepository
 import com.example.engwordlockscreen.domain.repository.QuizRepository
 import com.example.engwordlockscreen.domain.repository.WordRepository
 import com.example.engwordlockscreen.domain.usecase.quizusecases.*
@@ -60,16 +64,22 @@ object AppModule {
     }
     @Provides
     @Singleton
-    fun provideWordRepository(db : WordDatabase) : WordRepository
+    fun provideLocalWordRepository(db : WordDatabase) : LocalWordRepository
     {
-        return WordRepositoryImpl(db.wordDAO())
+        return LocalWordRepositoryImpl(db.wordDAO())
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideWordApiRepository(network : ApiService) : WordApiRepository {
-//
-//    }
+    @Provides
+    @Singleton
+    fun provideWordApiRepository(network : ApiService) : ApiRepository {
+        return ApiRepositoryImpl(network)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWordRepository(localRepository : LocalWordRepository, remoteRepository: ApiRepository) : WordRepository {
+        return WordRepositoryImpl(localRepository, remoteRepository)
+    }
 
     /*
      * Domain Layer
@@ -84,7 +94,8 @@ object AppModule {
             insertWordUseCase = InsertWordUseCase(repository),
             sameWordUseCase = SameWordUseCase(repository),
             viewListUseCase = ViewListUseCase(repository),
-            deleteAllWordUseCase = DeleteAllWordUseCase(repository)
+            deleteAllWordUseCase = DeleteAllWordUseCase(repository),
+            viewListByNaverApi = ViewListByNaverApiUseCase(repository)
                            )
     }
     @Provides

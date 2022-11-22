@@ -5,5 +5,6 @@ data class WordUseCases(
     val insertWordUseCase: InsertWordUseCase,
     val sameWordUseCase: SameWordUseCase,
     val viewListUseCase: ViewListUseCase,
-    val deleteAllWordUseCase: DeleteAllWordUseCase
+    val deleteAllWordUseCase: DeleteAllWordUseCase,
+    val viewListByNaverApi : ViewListByNaverApiUseCase
                        )

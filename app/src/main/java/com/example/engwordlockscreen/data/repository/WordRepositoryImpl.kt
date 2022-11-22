@@ -1,33 +1,39 @@
 package com.example.engwordlockscreen.data.repository
 
-import com.example.engwordlockscreen.data.datasource.database.WordDAO
-import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
+import com.example.engwordlockscreen.constants.Response
+import com.example.engwordlockscreen.domain.database.WordEntities
+import com.example.engwordlockscreen.domain.remote.WordApiModel
+import com.example.engwordlockscreen.data.repository.remote.ApiRepository
+import com.example.engwordlockscreen.data.repository.local.LocalWordRepository
 import com.example.engwordlockscreen.domain.repository.WordRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class WordRepositoryImpl @Inject constructor(
-    private val dao : WordDAO
-    ) : WordRepository {
-
-    override suspend fun insertWord(wordEntity: WordEntity) {
-        dao.insertWordDB(wordEntity)
+    private val localRepository : LocalWordRepository,
+    private val remoteRepository : ApiRepository
+) : WordRepository {
+    override suspend fun insertWord(wordEntity: WordEntities) {
+        localRepository.insertWord(wordEntity)
     }
 
-    override suspend fun viewList(): Flow<MutableList<WordEntity>> {
-        return dao.viewList()
+    override suspend fun viewList(): Flow<MutableList<WordEntities>> {
+       return localRepository.viewList()
     }
 
-    override suspend fun viewSameWord(s: String): Flow<MutableList<WordEntity>> {
-        return dao.viewSameWord(s)
+    override suspend fun viewSameWord(s: String): Flow<MutableList<WordEntities>> {
+        return localRepository.viewSameWord(s)
     }
 
     override suspend fun deleteSameWords(s: String) {
-        return dao.deleteSameWords(s)
+        localRepository.deleteSameWords(s)
     }
 
     override suspend fun deleteAllWords() {
-        return dao.deleteAllWords()
+        localRepository.deleteAllWords()
     }
 
+    override suspend fun getWordListByApi(engWord: String): Flow<Response<List<WordApiModel>>> {
+        return remoteRepository.getWordListByApi(engWord)
+    }
 }
