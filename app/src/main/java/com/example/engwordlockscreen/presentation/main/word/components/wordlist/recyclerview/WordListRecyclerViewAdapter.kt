@@ -1,14 +1,11 @@
-package com.example.engwordlockscreen.presentation.utils.recyclerview.adapters
+package com.example.engwordlockscreen.presentation.main.word.components.wordlist.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.engwordlockscreen.databinding.ListCustomItemBinding
-import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 import com.example.engwordlockscreen.domain.database.WordEntities
-import com.example.engwordlockscreen.presentation.utils.recyclerview.diffutil.WordListDiffUtil
-import com.example.engwordlockscreen.presentation.utils.recyclerview.viewholder.WordListViewHolder
 
 class WordListRecyclerViewAdapter(
     private val longClick : (String) -> Unit,

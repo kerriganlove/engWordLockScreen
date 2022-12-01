@@ -1,22 +1,11 @@
 package com.example.engwordlockscreen.presentation.main.components
 
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.engwordlockscreen.R
-import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.MainViewPagerAdapter
 import com.example.engwordlockscreen.databinding.ActivityMainBinding
-import com.example.engwordlockscreen.databinding.FragmentWordListBinding
-import com.example.engwordlockscreen.presentation.lockscreen.LockScreenService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
@@ -69,7 +58,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.action_word_list ->
             {
                 binding.mainViewPager.currentItem = 1
-                // binding.mainBottomNavigation.visibility = View.GONE
                 return true
             }
             R.id.action_idiom_insert ->

@@ -4,32 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.lockscreen.lockscreen.LockScreenActivity"
+    tools:context=".presentation.lockscreen.components.LockScreenActivity"
     android:orientation="vertical"
     android:background="@color/cardview_light_background">
+
     <TextClock
         android:id="@+id/text_clock"
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="horizontal"
         android:id="@+id/clock_division"
-        android:layout_below="@+id/text_clock"/>
+        android:layout_below="@+id/text_clock" />
 
     <FrameLayout
         android:id="@+id/quiz_fragments"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/viewpager_division"
-        android:layout_below="@id/clock_division" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/clock_division"
+        android:layout_above="@+id/viewpager_division" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="horizontal"
         android:id="@+id/viewpager_division"
         android:layout_above="@id/screen_off_layout"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/remain_button_clicked"
-            android:text="5"
+            android:text="100000"
+            android:textColor="@color/black"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center"/>

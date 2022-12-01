@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.presentation.word.components
+package com.example.engwordlockscreen.presentation.main.word.components.insert
 
 import android.content.Context
 import android.os.Bundle
@@ -11,12 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.engwordlockscreen.R
-import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 import com.example.engwordlockscreen.databinding.FragmentWordInsertBinding
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.presentation.utils.StringFilter
-import com.example.engwordlockscreen.presentation.word.WordEvent
-import com.example.engwordlockscreen.presentation.word.WordViewModel
+import com.example.engwordlockscreen.presentation.main.word.WordEvent
+import com.example.engwordlockscreen.presentation.main.WordViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -132,14 +131,13 @@ class WordInsertFragment : Fragment() {
         {
             viewModel.onEvent(WordEvent.Insert(wordEntity[i]))
         }
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             Toast.makeText(context,wordEntity[0].word + " 등록 완료.",Toast.LENGTH_LONG).show()
             wordList.clear()
         }
     }
 
-    private fun insertByDic()
-    {
+    private fun insertByDic() {
 
     }
 

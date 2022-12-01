@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.presentation.utils.recyclerview.diffutil
+package com.example.engwordlockscreen.presentation.main.word.components.wordlist.recyclerview
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.engwordlockscreen.domain.database.WordEntities

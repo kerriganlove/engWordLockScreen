@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.presentation.lockscreen
+package com.example.engwordlockscreen.presentation.lockscreen.components
 
 import android.app.*
 import android.content.BroadcastReceiver
@@ -7,8 +7,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
 import android.os.IBinder
-import android.util.Log
-import com.example.engwordlockscreen.presentation.lockscreen.components.LockScreenActivity
 import java.security.SecureRandom
 
 class LockScreenService : Service()
@@ -26,7 +24,6 @@ class LockScreenService : Service()
                         val secureRandom = SecureRandom()
                         val quizNum = secureRandom.nextInt(2)
                         lockIntent.putExtra("quizUI",quizNum)
-                        Log.d("Hi","LockscreenService On")
                         startActivity(lockIntent)
                     }
                 }

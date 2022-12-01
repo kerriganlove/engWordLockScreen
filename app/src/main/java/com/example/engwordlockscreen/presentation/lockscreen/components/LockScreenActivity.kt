@@ -12,9 +12,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.engwordlockscreen.databinding.ActivityLockScreenBinding
-import com.example.engwordlockscreen.presentation.quiz.QuizViewModel
-import com.example.engwordlockscreen.presentation.quiz.components.MultiChoiceFragment
-import com.example.engwordlockscreen.presentation.quiz.components.PuzzleFragment
+import com.example.engwordlockscreen.presentation.lockscreen.quiz.QuizViewModel
+import com.example.engwordlockscreen.presentation.lockscreen.quiz.components.multichoice.MultiChoiceFragment
+import com.example.engwordlockscreen.presentation.lockscreen.quiz.components.puzzle.PuzzleFragment
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
 
@@ -23,10 +23,10 @@ import dagger.hilt.android.WithFragmentBindings
 class LockScreenActivity : AppCompatActivity() {
     private var _binding : ActivityLockScreenBinding? = null
     private val binding get() = _binding!!
-    override fun onStart() {
-        super.onStart()
-
-    }
+    private val viewModel = viewModels<QuizViewModel>()
+    /*
+     * LifeCycle
+     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +34,12 @@ class LockScreenActivity : AppCompatActivity() {
         setContentView(binding.root)
         init()
     }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
     private fun init()
     {
         screenOn()
@@ -60,8 +66,11 @@ class LockScreenActivity : AppCompatActivity() {
         {
             window.setDecorFitsSystemWindows(false)
             val controller = window.insetsController
-            controller!!.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-            controller!!.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            controller?.apply {
+                hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+            }
+            controller?.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+            controller?.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
         else
         {

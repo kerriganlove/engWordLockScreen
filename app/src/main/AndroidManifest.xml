@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:name=".WordApp"
@@ -28,13 +30,14 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
-            android:taskAffinity="com.example.engwordlockscreen.lockscreen" />
+            android:taskAffinity="com.example.engwordlockscreen.lockscreen"
+            android:screenOrientation="portrait"/>
         <activity android:name="com.example.engwordlockscreen.presentation.main.components.MainActivity">
         </activity>
-        <service android:name="com.example.engwordlockscreen.presentation.lockscreen.LockScreenService"
+        <service android:name="com.example.engwordlockscreen.presentation.lockscreen.components.LockScreenService"
             android:enabled="true"
             android:permission="android.permission.SYSTEM_ALERT_WINDOW"
-            android:exported="false" /> // exported = 타 어플리케이션의 해당 서비스 호출 가능 여부
+            android:exported="false" />
 
     </application>
 

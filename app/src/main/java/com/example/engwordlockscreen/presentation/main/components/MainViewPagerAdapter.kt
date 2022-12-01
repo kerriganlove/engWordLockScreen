@@ -1,11 +1,12 @@
-package com.example.engwordlockscreen.presentation.utils.recyclerview.adapters
+package com.example.engwordlockscreen.presentation.main.components
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.engwordlockscreen.presentation.fragments.*
-import com.example.engwordlockscreen.presentation.word.components.WordInsertFragment
-import com.example.engwordlockscreen.presentation.word.components.WordListFragment
+import com.example.engwordlockscreen.presentation.main.setting.components.SettingFragment
+import com.example.engwordlockscreen.presentation.main.word.components.insert.WordInsertFragment
+import com.example.engwordlockscreen.presentation.main.word.components.wordlist.WordListFragment
 
 class MainViewPagerAdapter(fa : FragmentActivity) : FragmentStateAdapter(fa) {
     override fun getItemCount(): Int {

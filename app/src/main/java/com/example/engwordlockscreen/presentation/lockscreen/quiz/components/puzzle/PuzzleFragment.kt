@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.presentation.quiz.components
+package com.example.engwordlockscreen.presentation.lockscreen.quiz.components.puzzle
 
 import android.os.Bundle
 import android.view.LayoutInflater

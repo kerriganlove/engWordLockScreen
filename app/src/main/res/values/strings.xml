@@ -21,4 +21,6 @@
     <string name="screen_off">무료 해제</string>
     <string name="permission_error_text">권한 거부로 잠금화면 기능을 이용하실 수 없습니다.\n 잠금화면을 사용하시려면 설정에서 권한 허용을 클릭해주세요.</string>
     <string name="overlay_permission_btn_text">잠금화면 권한 허용 및 해제</string>
+    <string name="not_available_saved_word">저장된 영어단어가 없습니다.\n아래의 버튼을 통해 잠금화면을 해제해주세요.</string>
+    <string name="not_enough_quiz_data_text">퀴즈를 위한 충분한 데이터가 없습니다.\n아래의 버튼을 통해 잠금화면을 해제해주세요.</string>
 </resources>

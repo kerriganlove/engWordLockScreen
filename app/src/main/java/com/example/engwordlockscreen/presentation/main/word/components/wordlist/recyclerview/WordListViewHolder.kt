@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.presentation.utils.recyclerview.viewholder
+package com.example.engwordlockscreen.presentation.main.word.components.wordlist.recyclerview
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.engwordlockscreen.databinding.ListCustomItemBinding

@@ -11,10 +11,6 @@ class RecyclerItemClickListener(context : Context, recyclerView : RecyclerView, 
     var mListener = listener
     var mGestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener()
     {
-        override fun onSingleTapUp(e: MotionEvent?): Boolean {
-            return true
-        }
-
         override fun onLongPress(e: MotionEvent) {
             var view = rv.findChildViewUnder(e.x, e.y)
             if (view != null && mListener != null)

@@ -14,9 +14,6 @@ interface WordDAO
     @Update
     suspend fun updateCurMean(wordEntity : WordEntity)
 
-    @Query("SELECT * FROM wordDB")
-    suspend fun getList() : List<WordEntity>
-
     @Query("SELECT :word FROM wordDB")
     suspend fun wordCheck (word : String) : Boolean
 
@@ -32,10 +29,12 @@ interface WordDAO
     @Query("DELETE FROM wordDB")
     suspend fun deleteAllWords()
 
-    @Query("SELECT * FROM wordDB GROUP BY word ORDER BY RANDOM() LIMIT 9")
+    @RewriteQueriesToDropUnusedColumns
+    @Query("SELECT * FROM wordDB")
     fun getListByMultiChoiceQuiz() : Flow<List<WordEntity>>
 
-    @Query("SELECT * FROM wordDB GROUP BY word ORDER BY RANDOM() LIMIT 5")
+    @RewriteQueriesToDropUnusedColumns
+    @Query("SELECT *, (SELECT mean FROM wordDB ORDER BY RANDOM() LIMIT 1) FROM wordDB PI GROUP BY word LIMIT 5")
     fun getListByPuzzleQuiz(): Flow<List<WordEntity>>
 
 }

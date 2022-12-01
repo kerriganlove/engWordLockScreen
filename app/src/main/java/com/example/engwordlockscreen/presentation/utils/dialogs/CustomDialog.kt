@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.engwordlockscreen.databinding.CustomGeneralDialogBinding
 import com.example.engwordlockscreen.databinding.CustomWordDialogBinding
 import com.example.engwordlockscreen.domain.database.WordEntities
-import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.DialogRecyclerViewAdapter
 
 class CustomDialog(val context: Context)
 {

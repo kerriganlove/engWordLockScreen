@@ -1,7 +1,6 @@
-package com.example.engwordlockscreen.presentation.word.components
+package com.example.engwordlockscreen.presentation.main.word.components.wordlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +12,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.engwordlockscreen.databinding.FragmentWordListBinding
 import com.example.engwordlockscreen.presentation.utils.dialogs.CustomDialog
-import com.example.engwordlockscreen.presentation.utils.recyclerview.adapters.WordListRecyclerViewAdapter
-import com.example.engwordlockscreen.presentation.word.WordEvent
-import com.example.engwordlockscreen.presentation.word.WordViewModel
+import com.example.engwordlockscreen.presentation.main.word.WordEvent
+import com.example.engwordlockscreen.presentation.main.WordViewModel
+import com.example.engwordlockscreen.presentation.main.word.components.wordlist.recyclerview.WordListRecyclerViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
@@ -27,6 +26,7 @@ class WordListFragment : Fragment() {
     /*
      * Values
      */
+
     private var _binding : FragmentWordListBinding? = null
     private val binding get() = _binding!!
     private val viewModel by activityViewModels<WordViewModel>()
@@ -39,8 +39,12 @@ class WordListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentWordListBinding.inflate(inflater,container,false)
-        initView()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
     }
 
     override fun onDestroyView() {

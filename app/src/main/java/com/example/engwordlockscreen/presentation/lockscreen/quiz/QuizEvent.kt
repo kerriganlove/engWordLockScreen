@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.presentation.quiz
+package com.example.engwordlockscreen.presentation.lockscreen.quiz
 
 sealed class QuizEvent{
     data class MultiChoice(val s : String) : QuizEvent()

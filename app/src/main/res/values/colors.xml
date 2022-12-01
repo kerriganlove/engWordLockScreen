@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main_theme_blue">#FF0F4C81</color>
     <color name="focused_color">#FF3CB371</color>
+    <color name="btn_background_royal_blue">#066bc6</color>
+    <color name="background_pretty_grey">#808080</color>
 </resources>

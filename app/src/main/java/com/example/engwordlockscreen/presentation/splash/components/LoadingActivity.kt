@@ -2,7 +2,6 @@ package com.example.engwordlockscreen.presentation.splash.components
 
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -10,15 +9,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import com.example.engwordlockscreen.presentation.main.components.MainActivity
 import com.example.engwordlockscreen.R
-import com.example.engwordlockscreen.WordApp
-import com.example.engwordlockscreen.presentation.lockscreen.LockScreenService
+import com.example.engwordlockscreen.presentation.lockscreen.components.LockScreenService
 import com.example.engwordlockscreen.presentation.utils.ConstUtil
 import com.example.engwordlockscreen.presentation.utils.ToastUtil
 import com.example.engwordlockscreen.presentation.utils.dialogs.CustomDialog
