@@ -35,8 +35,8 @@ class WordViewModel @Inject constructor(
     }
 
     suspend fun viewList() : StateFlow<List<WordEntities>> = wordUseCases.viewListUseCase()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
+        .stateIn(viewModelScope)
 
     suspend fun viewSameWord(s : String) : StateFlow<List<WordEntities>> = wordUseCases.sameWordUseCase(s)
-        .stateIn(viewModelScope,SharingStarted.WhileSubscribed(), emptyList())
+        .stateIn(viewModelScope)
 }

@@ -1,6 +1,7 @@
 package com.example.engwordlockscreen.presentation.main.word.components.wordlist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -93,6 +94,7 @@ class WordListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             var wordlist = viewModel.viewSameWord(s).first()
             dlgUtil.wordListFunction(wordlist)
+            Log.d("TRANSFER", "${wordlist}")
         }
     }
     private fun deleteWord(s: String)

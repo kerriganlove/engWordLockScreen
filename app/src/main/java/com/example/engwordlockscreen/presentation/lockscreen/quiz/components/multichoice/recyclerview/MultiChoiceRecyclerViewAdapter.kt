@@ -7,14 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.engwordlockscreen.databinding.ListMultichoiceItemBinding
 import com.example.engwordlockscreen.domain.database.WordEntities
 
-class MultiChoiceRecyclerViewAdapter : RecyclerView.Adapter<MultiChoiceViewHolder>() {
+class MultiChoiceRecyclerViewAdapter(
+    private val onClick : (Any) -> Unit
+) : RecyclerView.Adapter<MultiChoiceViewHolder>() {
 
     private lateinit var binding : ListMultichoiceItemBinding
     private var itemList : MutableList<WordEntities> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MultiChoiceViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         binding = ListMultichoiceItemBinding.inflate(layoutInflater, parent, false)
-        return MultiChoiceViewHolder(binding)
+        return MultiChoiceViewHolder(binding, onClick)
     }
 
     override fun onBindViewHolder(holder: MultiChoiceViewHolder, position: Int) {
@@ -22,7 +24,6 @@ class MultiChoiceRecyclerViewAdapter : RecyclerView.Adapter<MultiChoiceViewHolde
     }
 
     override fun getItemCount(): Int {
-        Log.d("TRANSFER", "${itemList.size}")
         return itemList.size
     }
 
@@ -32,6 +33,5 @@ class MultiChoiceRecyclerViewAdapter : RecyclerView.Adapter<MultiChoiceViewHolde
       */
     fun setList(list : List<WordEntities>) {
         Log.d("TRANSFER", "${itemList.addAll(list)}")
-        Log.d("TRANSFER","$itemList")
     }
 }

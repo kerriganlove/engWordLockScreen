@@ -72,16 +72,26 @@ class MultiChoiceFragment : Fragment() {
     }
 
     private fun setGridView(list : List<WordEntities>) {
-        recyclerViewAdapter = MultiChoiceRecyclerViewAdapter()
+        recyclerViewAdapter = MultiChoiceRecyclerViewAdapter(onClick = { s : WordEntities -> judge(s)} as (Any) -> Unit)
         recyclerViewAdapter.setList(list)
         binding.answerListGridview.apply {
             adapter = recyclerViewAdapter
             layoutManager = GridLayoutManager(context,3)
         }
-        val correctNum = Random.nextInt(list.size)
-        val remainCount = list.groupBy { it.word == list[correctNum].word }.values.size
-        binding.correctWords.text = list[correctNum].word
-        binding.emptySavedWordsBtn.visibility = View.GONE
-        binding.correctCount.text = remainCount.toString()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.correctCount.collect {
+                binding.correctCount.text = it.toString()
+            }
+            viewModel.correctList.collect {
+                binding.correctWords.text =
+                    if (!it.isNullOrEmpty()) it[0].word else context?.getString(R.string.not_available_saved_word)
+            }
+        }
+    }
+
+    private fun judge(word : WordEntities) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            Log.d("TRANSFER", "${viewModel.judgeWord(word)}")
+        }
     }
 }
