@@ -27,7 +27,7 @@ class CustomDialog(val context: Context)
         val window = dlg.window
         window!!.attributes = dlgWin
         Log.d("wordList size", wordList.size.toString())
-        if ( wordList.size != 0) {
+        if ( wordList.isNotEmpty()) {
             binding.dialogMainWord.text = wordList[0].word
             binding.meanRecyclerview.adapter = DialogRecyclerViewAdapter(wordList, context)
             binding.meanRecyclerview.layoutManager = LinearLayoutManager(context)

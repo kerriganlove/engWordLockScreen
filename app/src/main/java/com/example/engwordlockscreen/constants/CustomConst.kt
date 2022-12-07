@@ -21,4 +21,14 @@ object CustomConst {
     const val ERROR_BY_UNEXPECTED = "예기치 않은 상황으로 인한 오류입니다."
     const val ERROR_BY_NETWORK = "서버에 접속할 수 없습니다. 네트워크 상태를 확인해주세요."
 
+    /*
+     * Dialog View Tag
+     */
+    const val CORRECT_LOADING_DIALOG_TAG = "CORRECT_LOADING_DIALOG_TAG"
+
+    /*
+     * Time
+     */
+    const val ANIMATE_CORRECT_TIME : Long = 2000 // 2sec
+
 }

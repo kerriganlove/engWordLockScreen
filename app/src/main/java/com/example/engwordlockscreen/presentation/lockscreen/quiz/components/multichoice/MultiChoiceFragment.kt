@@ -1,5 +1,6 @@
 package com.example.engwordlockscreen.presentation.lockscreen.quiz.components.multichoice
 
+import android.app.ActionBar.LayoutParams
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,12 +11,19 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.engwordlockscreen.R
+import com.example.engwordlockscreen.constants.CustomConst
+import com.example.engwordlockscreen.constants.UiState
 import com.example.engwordlockscreen.databinding.FragmentMuitichoiceBinding
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.presentation.lockscreen.quiz.QuizViewModel
+import com.example.engwordlockscreen.presentation.lockscreen.quiz.components.multichoice.recyclerview.MultiChoiceItemDecoration
 import com.example.engwordlockscreen.presentation.lockscreen.quiz.components.multichoice.recyclerview.MultiChoiceRecyclerViewAdapter
+import com.example.engwordlockscreen.presentation.utils.dialogs.LoadingDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
@@ -47,13 +55,14 @@ class MultiChoiceFragment : Fragment() {
 
     private fun initData() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.getMultiChoiceList().collect {
-                Log.d("TRANSFER",it.toString())
-                if ( it.isEmpty() || it.size < 3) {
-                    setEmptyView(it.size)
-                }
-                else {
-                    setGridView(it)
+            viewModel.getMultiChoiceList().collect { uiState ->
+                when(uiState) {
+                    is UiState.Fail -> {
+                        setEmptyView(uiState.data as Int)
+                    }
+                    is UiState.Success ->{
+                        setCorrectView(uiState.data as List<WordEntities>)
+                    }
                 }
             }
         }
@@ -66,32 +75,53 @@ class MultiChoiceFragment : Fragment() {
     private fun setEmptyView(size : Int) {
         val string = if (size != 0) context?.getString(R.string.not_enough_quiz_data_text) else context?.getString(R.string.not_available_saved_word)
         binding.correctWords.text = string
-        binding.answerListGridview.visibility = View.GONE
+        binding.answerListGridview.visibility = View.INVISIBLE
         binding.correctCount.visibility = View.GONE
-        binding.emptySavedWordsBtn.setOnClickListener { requireActivity().finish() }
+        binding.emptySavedWordsBtn.apply {
+            visibility = View.VISIBLE
+            setOnClickListener { requireActivity().finish() }
+        }
     }
 
-    private fun setGridView(list : List<WordEntities>) {
-        recyclerViewAdapter = MultiChoiceRecyclerViewAdapter(onClick = { s : WordEntities -> judge(s)} as (Any) -> Unit)
+    private fun setCorrectView(list : List<WordEntities>) {
+        recyclerViewAdapter = MultiChoiceRecyclerViewAdapter(onClick = {s : Any -> judge(s as WordEntities) })
         recyclerViewAdapter.setList(list)
         binding.answerListGridview.apply {
             adapter = recyclerViewAdapter
             layoutManager = GridLayoutManager(context,3)
+            addItemDecoration(MultiChoiceItemDecoration())
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.correctCount.collect {
-                binding.correctCount.text = it.toString()
-            }
+        viewLifecycleOwner.lifecycleScope.launch{
             viewModel.correctList.collect {
-                binding.correctWords.text =
-                    if (!it.isNullOrEmpty()) it[0].word else context?.getString(R.string.not_available_saved_word)
+                when(it.size) {
+                    0 -> {
+                        showCorrectAnimate()
+                    }
+                    else -> {
+                        binding.correctCount.text = it.size.toString()
+                        binding.correctWords.text = it[0].word
+                    }
+                }
             }
         }
     }
 
-    private fun judge(word : WordEntities) {
+    private fun judge(word : WordEntities) : Boolean {
+        var answer = false
         viewLifecycleOwner.lifecycleScope.launch {
-            Log.d("TRANSFER", "${viewModel.judgeWord(word)}")
+            answer = viewModel.judgeWordByList(word)
         }
+        return answer
+    }
+
+    private suspend fun showCorrectAnimate() {
+        // TODO 다이얼로그 애니메이션 만들기.
+        val dialog = LoadingDialogFragment(onDismissFunction = {requireActivity().finish()})
+        dialog.apply {
+            this.isCancelable = false
+        }
+        dialog.show(parentFragmentManager, CustomConst.CORRECT_LOADING_DIALOG_TAG)
+        delay(CustomConst.ANIMATE_CORRECT_TIME)
+        dialog.dismiss()
     }
 }

@@ -8,7 +8,7 @@ import com.example.engwordlockscreen.databinding.ListMultichoiceItemBinding
 import com.example.engwordlockscreen.domain.database.WordEntities
 
 class MultiChoiceRecyclerViewAdapter(
-    private val onClick : (Any) -> Unit
+    private val onClick : (Any) -> Boolean
 ) : RecyclerView.Adapter<MultiChoiceViewHolder>() {
 
     private lateinit var binding : ListMultichoiceItemBinding

@@ -13,8 +13,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.engwordlockscreen.presentation.main.components.MainActivity
 import com.example.engwordlockscreen.R
+import com.example.engwordlockscreen.constants.CustomConst
 import com.example.engwordlockscreen.presentation.lockscreen.components.LockScreenService
-import com.example.engwordlockscreen.presentation.utils.ConstUtil
 import com.example.engwordlockscreen.presentation.utils.ToastUtil
 import com.example.engwordlockscreen.presentation.utils.dialogs.CustomDialog
 
@@ -39,10 +39,10 @@ class LoadingActivity : AppCompatActivity() {
     }
 
     private fun showPopUp() {
-        val pref = getSharedPreferences(ConstUtil.FIRST_APP_INSTALL, Activity.MODE_PRIVATE)
-        val first = pref.getBoolean(ConstUtil.FIRST_APP_INSTALL, false)
+        val pref = getSharedPreferences(CustomConst.FIRST_APP_INSTALL, Activity.MODE_PRIVATE)
+        val first = pref.getBoolean(CustomConst.FIRST_APP_INSTALL, false)
         if ( !first ) {
-            pref.edit().putBoolean(ConstUtil.FIRST_APP_INSTALL, true).apply()
+            pref.edit().putBoolean(CustomConst.FIRST_APP_INSTALL, true).apply()
             setResult()
             enterFirst()
         } else {

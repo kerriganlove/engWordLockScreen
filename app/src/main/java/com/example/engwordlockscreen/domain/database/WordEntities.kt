@@ -3,10 +3,10 @@ package com.example.engwordlockscreen.domain.database
 import com.example.engwordlockscreen.data.datasource.database.dto.WordEntity
 
 data class WordEntities(
-    val id  : Int,
-    var word : String,
-    var parts: String,
-    var mean : String
+    val id  : Int = 0,
+    var word : String = "",
+    var parts: String = "",
+    var mean : String = ""
 )
 
 fun WordEntities.toWordEntity() : WordEntity {
@@ -16,5 +16,5 @@ fun WordEntities.toWordEntity() : WordEntity {
         parts = parts,
         mean = mean
     )
-
 }
+
