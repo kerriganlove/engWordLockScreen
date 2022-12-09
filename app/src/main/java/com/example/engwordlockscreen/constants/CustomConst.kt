@@ -9,6 +9,7 @@ object CustomConst {
     const val OVERLAY_PERMISSION_TOGGLE = "OVERLAY_PERMISSION_TOGGLE"
     const val REMAIN_CHANCES_FREE_UNLOCK = "REMAIN_CHANCES_FREE_UNLOCK"
     const val DEFAULT_REMAIN_COUNT = 5
+    const val APP_VERSION_CODE = 1
 
     /*
      * Query Constants

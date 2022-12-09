@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.data.datasource.database
+package com.example.engwordlockscreen.data.datasource.database.wordDB
 
 import androidx.room.*
 import androidx.room.OnConflictStrategy.ABORT

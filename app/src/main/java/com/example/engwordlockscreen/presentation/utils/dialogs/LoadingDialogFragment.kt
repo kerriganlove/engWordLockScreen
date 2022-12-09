@@ -1,11 +1,9 @@
 package com.example.engwordlockscreen.presentation.utils.dialogs
 
-import android.app.ActionBar.LayoutParams
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.constants.CustomConst

@@ -7,8 +7,10 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
 import android.os.IBinder
+import dagger.hilt.android.AndroidEntryPoint
 import java.security.SecureRandom
 
+@AndroidEntryPoint
 class LockScreenService : Service()
 {
     private val receiver = object : BroadcastReceiver() {
@@ -35,6 +37,7 @@ class LockScreenService : Service()
     {
         return null
     }
+
 
     override fun onCreate() {
         super.onCreate()

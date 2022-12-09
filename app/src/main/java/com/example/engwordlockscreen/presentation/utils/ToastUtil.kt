@@ -4,9 +4,4 @@ import android.content.Context
 import android.widget.Toast
 import com.example.engwordlockscreen.R
 
-object ToastUtil {
-
-    fun permissionToast(context : Context) = Toast.makeText(context, context.getString(R.string.permission_error_text), Toast.LENGTH_LONG).show()
-
-
-}
+fun Context.showPermissionToast() = Toast.makeText(this, this.getString(R.string.permission_error_text), Toast.LENGTH_LONG).show()

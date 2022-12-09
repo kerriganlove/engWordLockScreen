@@ -2,8 +2,8 @@ package com.example.engwordlockscreen.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.engwordlockscreen.data.datasource.database.WordDatabase
-import com.example.engwordlockscreen.data.datasource.database.WordDatabase.Companion.DATABASE_NAME
+import com.example.engwordlockscreen.data.datasource.database.wordDB.WordDatabase
+import com.example.engwordlockscreen.data.datasource.database.wordDB.WordDatabase.Companion.DATABASE_NAME
 import com.example.engwordlockscreen.data.datasource.remote.ApiService
 import com.example.engwordlockscreen.data.repository.WordRepositoryImpl
 import com.example.engwordlockscreen.data.repository.remote.ApiRepositoryImpl

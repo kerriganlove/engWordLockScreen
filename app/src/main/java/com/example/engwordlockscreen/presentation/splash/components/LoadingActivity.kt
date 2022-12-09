@@ -4,20 +4,22 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.engwordlockscreen.presentation.main.components.MainActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.constants.CustomConst
 import com.example.engwordlockscreen.presentation.lockscreen.components.LockScreenService
-import com.example.engwordlockscreen.presentation.utils.ToastUtil
+import com.example.engwordlockscreen.presentation.main.components.MainActivity
 import com.example.engwordlockscreen.presentation.utils.dialogs.CustomDialog
+import com.example.engwordlockscreen.presentation.utils.showPermissionToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoadingActivity : AppCompatActivity() {
     companion object {
         private const val LOADING_TIME_OUT : Long = 3000
@@ -53,6 +55,7 @@ class LoadingActivity : AppCompatActivity() {
     private fun startLoading()
     {
         val intent = Intent(application, MainActivity::class.java)
+        // TODO Coroutine 변경 및 Util or Helper 클래스로 변경
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(intent)
             finish()
@@ -75,7 +78,7 @@ class LoadingActivity : AppCompatActivity() {
     private fun enterSeveral() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
-                ToastUtil.permissionToast(this)
+                showPermissionToast()
                 startLoading()
             }
             else {

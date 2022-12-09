@@ -1,6 +1,6 @@
 package com.example.engwordlockscreen.data.repository.local
 
-import com.example.engwordlockscreen.data.datasource.database.WordDAO
+import com.example.engwordlockscreen.data.datasource.database.wordDB.WordDAO
 import com.example.engwordlockscreen.data.datasource.database.dto.toWordEntities
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.domain.database.toWordEntity

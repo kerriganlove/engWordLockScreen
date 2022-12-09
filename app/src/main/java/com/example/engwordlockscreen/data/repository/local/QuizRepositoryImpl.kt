@@ -1,13 +1,10 @@
 package com.example.engwordlockscreen.data.repository.local
 
-import com.example.engwordlockscreen.data.datasource.database.WordDAO
+import com.example.engwordlockscreen.data.datasource.database.wordDB.WordDAO
 import com.example.engwordlockscreen.data.datasource.database.dto.toWordEntities
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.domain.repository.QuizRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
