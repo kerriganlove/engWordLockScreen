@@ -1,31 +1,31 @@
 package com.example.engwordlockscreen.presentation.lockscreen.quiz.components.multichoice
 
-import android.app.ActionBar.LayoutParams
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.constants.CustomConst
+import com.example.engwordlockscreen.constants.DialogTag
 import com.example.engwordlockscreen.constants.UiState
 import com.example.engwordlockscreen.databinding.FragmentMuitichoiceBinding
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.presentation.lockscreen.quiz.QuizViewModel
 import com.example.engwordlockscreen.presentation.lockscreen.quiz.components.multichoice.recyclerview.MultiChoiceItemDecoration
 import com.example.engwordlockscreen.presentation.lockscreen.quiz.components.multichoice.recyclerview.MultiChoiceRecyclerViewAdapter
+import com.example.engwordlockscreen.presentation.utils.dialogs.CorrectDialogFragment
+import com.example.engwordlockscreen.presentation.utils.dialogs.DialogUtil
 import com.example.engwordlockscreen.presentation.utils.dialogs.LoadingDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 @AndroidEntryPoint
 class MultiChoiceFragment : Fragment() {
@@ -55,13 +55,23 @@ class MultiChoiceFragment : Fragment() {
 
     private fun initData() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.getMultiChoiceList().collect { uiState ->
-                when(uiState) {
-                    is UiState.Fail -> {
-                        setEmptyView(uiState.data as Int)
-                    }
-                    is UiState.Success ->{
-                        setCorrectView(uiState.data as List<WordEntities>)
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.getMultiChoiceList().collect { uiState ->
+                    when(uiState) {
+                        is UiState.Fail -> {
+                            DialogUtil.dismissDialog(DialogTag.LoadingDialog)
+                            setEmptyView(uiState.data as Int)
+                        }
+                        is UiState.Success ->{
+                            DialogUtil.dismissDialog(DialogTag.LoadingDialog)
+                            setCorrectView(uiState.data as List<WordEntities>)
+                        }
+                        is UiState.Loading -> {
+                            DialogUtil.showDialog(DialogTag.LoadingDialog, parentFragmentManager)
+                        }
+                        is UiState.RefreshData -> {
+                            TODO()
+                        }
                     }
                 }
             }
@@ -115,13 +125,6 @@ class MultiChoiceFragment : Fragment() {
     }
 
     private suspend fun showCorrectAnimate() {
-        // TODO 다이얼로그 애니메이션 만들기.
-        val dialog = LoadingDialogFragment(onDismissFunction = {requireActivity().finish()})
-        dialog.apply {
-            this.isCancelable = false
-        }
-        dialog.show(parentFragmentManager, CustomConst.CORRECT_LOADING_DIALOG_TAG)
-        delay(CustomConst.ANIMATE_CORRECT_TIME)
-        dialog.dismiss()
+        DialogUtil.showDialog(tag = DialogTag.CorrectAnswerDialog, fm = parentFragmentManager, delayTime = CustomConst.ANIMATE_CORRECT_TIME)
     }
 }

@@ -29,7 +29,6 @@ interface WordDAO
     @Query("DELETE FROM wordDB")
     suspend fun deleteAllWords()
 
-    @RewriteQueriesToDropUnusedColumns
     @Query("SELECT * FROM wordDB")
     fun getListByMultiChoiceQuiz() : Flow<List<WordEntity>>
 

@@ -12,11 +12,22 @@ class QuizRepositoryImpl @Inject constructor(
     private val dao : WordDAO
 ) : QuizRepository{
     override suspend fun getMultiChoiceWord() : Flow<List<WordEntities>> {
-        return dao.getListByMultiChoiceQuiz().map { it -> it.map { it.toWordEntities()} }
+        return dao.getListByMultiChoiceQuiz().map { it ->
+            it.map { it.toWordEntities() }
+                .shuffled()
+                .take(9)
+        }
     }
 
     override suspend fun getPuzzleWord() : Flow<List<WordEntities>> {
-        return dao.getListByPuzzleQuiz().map { it -> it.map { it.toWordEntities()}}
+        return dao.getListByPuzzleQuiz().map { it ->
+            it.map { it.toWordEntities() }
+                .groupBy { it.word }
+                .values
+                .shuffled()
+                .map { it.random() }
+                .take(5)
+        }
     }
 
 }

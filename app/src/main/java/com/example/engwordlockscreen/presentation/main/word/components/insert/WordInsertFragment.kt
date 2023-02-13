@@ -50,7 +50,7 @@ class WordInsertFragment : Fragment() {
 
     private fun init()
     {
-        binding?.wordInsertEdittext?.filters = arrayOf(StringFilter().FilterENG)
+        binding?.wordInsertEdittext?.filters = arrayOf(StringFilter.filterENG)
     }
 
     private fun buttonClick()
@@ -73,7 +73,7 @@ class WordInsertFragment : Fragment() {
         insertView = inflater?.inflate(R.layout.design_insert_form,mInflater,false)
         if ( viewCount < 5 ) {
             insertView?.id = 0x8898 + (5 - viewCount)
-            insertView?.findViewById<EditText>(R.id.insert_mean_edittext)?.filters = arrayOf(StringFilter().FilterKOR)
+            insertView?.findViewById<EditText>(R.id.insert_mean_edittext)?.filters = arrayOf(StringFilter.filterKOR)
             binding?.wordMeanInsert!!.addView(insertView)
             viewCount++
         }

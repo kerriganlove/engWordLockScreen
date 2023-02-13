@@ -1,29 +1,26 @@
 package com.example.engwordlockscreen.presentation.utils.dialogs
 
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.example.engwordlockscreen.R
-import com.example.engwordlockscreen.constants.CustomConst
+import com.example.engwordlockscreen.databinding.DialogDefaultLoadingBinding
 
+class LoadingDialogFragment : DialogFragment() {
 
-class LoadingDialogFragment(
-    private val onDismissFunction : () -> Unit
-) : DialogFragment() {
+    private lateinit var binding : DialogDefaultLoadingBinding
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = when(tag) {
-        CustomConst.CORRECT_LOADING_DIALOG_TAG -> {
-            AlertDialog.Builder(requireContext()).setView(R.layout.dialog_correct_loading).setCancelable(false).create()
-        }
-        else -> {
-            AlertDialog.Builder(requireContext()).create()
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DialogDefaultLoadingBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        onDismissFunction.invoke()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }

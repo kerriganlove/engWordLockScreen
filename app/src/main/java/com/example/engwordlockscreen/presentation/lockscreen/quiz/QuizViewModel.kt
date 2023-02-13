@@ -35,13 +35,12 @@ class QuizViewModel @Inject constructor(
                 UiState.Fail(err_data = wordList.size)
             }
             else -> {
-                val list = wordList.shuffled().take(9)
-                val subList = list.groupBy { it.word }.values.random()
+                val subList = wordList.groupBy { it.word }.values.random()
                 _correctList.emit(subList)
-                UiState.Success(list)
+                UiState.Success(wordList)
             }
         }
-    }.catch { e -> UiState.Fail(err_data = 0, err_msg = "$e") }.stateIn(viewModelScope)
+    }.catch { e -> UiState.Fail(err_data = 0, err_msg = "$e") }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), UiState.Loading)
 
     /*
      * Puzzle Quiz Data
@@ -53,10 +52,7 @@ class QuizViewModel @Inject constructor(
                 UiState.Fail(err_data = wordList.size)
             }
             else -> {
-                UiState.Success(wordList.groupBy { it.word }
-                    .values.shuffled()
-                    .map { it.random() }
-                    .take(5))
+                UiState.Success(wordList)
             }
         }
     }.catch { e -> UiState.Fail(err_data = 0, err_msg = "$e") }.stateIn(viewModelScope)
