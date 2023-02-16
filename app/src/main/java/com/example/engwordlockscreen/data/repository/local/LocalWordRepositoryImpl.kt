@@ -21,7 +21,7 @@ class LocalWordRepositoryImpl @Inject constructor(
     }
 
     override suspend fun viewSameWord(s: String): Flow<List<WordEntities>> {
-        return dao.viewSameWord(s).map { it -> it.map { it.toWordEntities() } }
+        return dao.viewSameWord(s).map { it -> it.map { it.toWordEntities() }.distinctBy { it.mean } }
     }
 
     override suspend fun deleteSameWords(s: String) {

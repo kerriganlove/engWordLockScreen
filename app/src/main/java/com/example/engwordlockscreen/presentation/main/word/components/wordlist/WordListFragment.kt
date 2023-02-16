@@ -11,11 +11,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.engwordlockscreen.presentation.utils.dialogs.DialogTag
+import com.example.engwordlockscreen.constants.UiState
 import com.example.engwordlockscreen.databinding.FragmentWordListBinding
-import com.example.engwordlockscreen.presentation.utils.dialogs.CustomDialog
 import com.example.engwordlockscreen.presentation.main.word.WordEvent
 import com.example.engwordlockscreen.presentation.main.WordViewModel
 import com.example.engwordlockscreen.presentation.main.word.components.wordlist.recyclerview.WordListRecyclerViewAdapter
+import com.example.engwordlockscreen.presentation.utils.dialogs.DialogUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
@@ -32,7 +34,6 @@ class WordListFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by activityViewModels<WordViewModel>()
     private lateinit var adapter : WordListRecyclerViewAdapter
-    private val dlgUtil by lazy { CustomDialog(requireContext())}
 
     /*
      * LifeCycle Callback
@@ -69,8 +70,20 @@ class WordListFragment : Fragment() {
         )
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.viewList().collect {
-                    adapter.updateItem(it)
+                viewModel.viewList().collect { state ->
+                    when(state) {
+                        is UiState.Success -> {
+                            DialogUtil.dismissDialog(DialogTag.LoadingDialog)
+                            adapter.updateItem(state.suc_data)
+                        }
+                        is UiState.Fail -> {
+
+                        }
+                        is UiState.Loading -> {
+                            DialogUtil.showDialog(DialogTag.LoadingDialog, fm = parentFragmentManager)
+                        }
+                        is UiState.RefreshData -> TODO()
+                    }
                 }
             }
         }
@@ -93,12 +106,11 @@ class WordListFragment : Fragment() {
     {
         viewLifecycleOwner.lifecycleScope.launch {
             var wordlist = viewModel.viewSameWord(s).first()
-            dlgUtil.wordListFunction(wordlist)
-            Log.d("TRANSFER", "${wordlist}")
+            DialogUtil.showDialog(DialogTag.WordListDialog, parentFragmentManager, data = wordlist)
+            Log.d("TRANSFER", "$wordlist")
         }
     }
-    private fun deleteWord(s: String)
-    {
-        dlgUtil.wordDeleteFunction { viewModel.onEvent(WordEvent.Delete(s)) }
+    private fun deleteWord(s: String) {
+        DialogUtil.showDialog(DialogTag.WordDeleteDialog, onPositiveBtnFunc = { viewModel.onEvent(WordEvent.Delete(s)) }, fm = parentFragmentManager)
     }
 }

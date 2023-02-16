@@ -9,9 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/dialog_part_textview"
-        android:layout_weight="1"
+        android:layout_weight="3"
         android:text="sample"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"

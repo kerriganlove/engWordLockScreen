@@ -14,7 +14,6 @@ import com.example.engwordlockscreen.constants.CustomConst
 
 class CorrectDialogFragment(
     private val onDismissFunction : () -> Unit = {},
-    @StringRes id : Int = -1
 ) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

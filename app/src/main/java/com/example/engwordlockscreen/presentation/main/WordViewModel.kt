@@ -1,6 +1,7 @@
 package com.example.engwordlockscreen.presentation.main
 
 import androidx.lifecycle.*
+import com.example.engwordlockscreen.constants.UiState
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.domain.usecase.wordusecases.WordUseCases
 import com.example.engwordlockscreen.presentation.main.word.WordEvent
@@ -34,8 +35,13 @@ class WordViewModel @Inject constructor(
         }
     }
 
-    suspend fun viewList() : StateFlow<List<WordEntities>> = wordUseCases.viewListUseCase()
-        .stateIn(viewModelScope)
+    suspend fun viewList() = wordUseCases.viewListUseCase()
+        .map {
+            UiState.Success(suc_data = it)
+        }.catch { e ->
+            UiState.Fail(err_data = 0 , err_msg = "$e" )
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), UiState.Loading)
 
     suspend fun viewSameWord(s : String) : StateFlow<List<WordEntities>> = wordUseCases.sameWordUseCase(s)
         .stateIn(viewModelScope)

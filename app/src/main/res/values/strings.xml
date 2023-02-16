@@ -14,14 +14,20 @@
     <string name="naver_dic_api">네이버 사전에서 찾기</string>
     <string name="list_add">단어장에 추가</string>
     <string name="db_clear">단어장 초기화</string>
-    <string name="warning_notify">예를 누를 시 해당 단어가 전체 삭제됩니다.</string>
+    <string name="warning_notify">예를 누를 시 \n해당 단어가 전체 삭제됩니다.</string>
     <string name="warning_isOk">삭제하시겠습니까?</string>
     <string name="yes">예</string>
     <string name="no">아니오</string>
     <string name="screen_off">무료 해제</string>
+
+    <!-- Permission Text -->
     <string name="permission_error_text">권한 거부로 잠금화면 기능을 이용하실 수 없습니다.\n 잠금화면을 사용하시려면 설정에서 권한 허용을 클릭해주세요.</string>
     <string name="overlay_permission_btn_text">잠금화면 권한 허용 및 해제</string>
+    <string name="first_permission_popup_text">잠금화면을 사용하시려면, 잠금 화면에 대한 아래의 권한을 허용해야합니다.\n "다른 앱 위에 그리기"</string>
+
+    <!-- Quiz Text -->
     <string name="not_available_saved_word">저장된 영어단어가 없습니다.\n아래의 버튼을 통해 잠금화면을 해제해주세요.</string>
     <string name="not_enough_quiz_data_text">퀴즈를 위한 충분한 데이터가 없습니다.\n아래의 버튼을 통해 잠금화면을 해제해주세요.</string>
-    <string name="default_loading_text">화면 구성 중입니다...</string>
+
+    <string name="default_loading_text">화면 구성 중입니다</string>
 </resources>

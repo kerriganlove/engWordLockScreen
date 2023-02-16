@@ -12,16 +12,14 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.constants.CustomConst
-import com.example.engwordlockscreen.constants.DialogTag
+import com.example.engwordlockscreen.presentation.utils.dialogs.DialogTag
 import com.example.engwordlockscreen.constants.UiState
 import com.example.engwordlockscreen.databinding.FragmentMuitichoiceBinding
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.presentation.lockscreen.quiz.QuizViewModel
 import com.example.engwordlockscreen.presentation.lockscreen.quiz.components.multichoice.recyclerview.MultiChoiceItemDecoration
 import com.example.engwordlockscreen.presentation.lockscreen.quiz.components.multichoice.recyclerview.MultiChoiceRecyclerViewAdapter
-import com.example.engwordlockscreen.presentation.utils.dialogs.CorrectDialogFragment
 import com.example.engwordlockscreen.presentation.utils.dialogs.DialogUtil
-import com.example.engwordlockscreen.presentation.utils.dialogs.LoadingDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
@@ -125,6 +123,8 @@ class MultiChoiceFragment : Fragment() {
     }
 
     private suspend fun showCorrectAnimate() {
-        DialogUtil.showDialog(tag = DialogTag.CorrectAnswerDialog, fm = parentFragmentManager, delayTime = CustomConst.ANIMATE_CORRECT_TIME)
+        DialogUtil.showDialog(tag = DialogTag.CorrectAnswerDialog, fm = parentFragmentManager)
+        delay(CustomConst.ANIMATE_CORRECT_TIME)
+        DialogUtil.dismissDialog(DialogTag.CorrectAnswerDialog)
     }
 }

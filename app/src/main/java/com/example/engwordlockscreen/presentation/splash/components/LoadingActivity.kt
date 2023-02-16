@@ -13,9 +13,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.constants.CustomConst
+import com.example.engwordlockscreen.presentation.utils.dialogs.DialogTag
 import com.example.engwordlockscreen.presentation.lockscreen.components.LockScreenService
 import com.example.engwordlockscreen.presentation.main.components.MainActivity
-import com.example.engwordlockscreen.presentation.utils.dialogs.CustomDialog
+import com.example.engwordlockscreen.presentation.utils.dialogs.DialogUtil
 import com.example.engwordlockscreen.presentation.utils.showPermissionToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +28,6 @@ class LoadingActivity : AppCompatActivity() {
     private lateinit var getResult : ActivityResultLauncher<Intent>
 
 
-    private val dlgUtil = CustomDialog(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loading)
@@ -93,15 +93,22 @@ class LoadingActivity : AppCompatActivity() {
 
     private fun enterFirst() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            dlgUtil.wordDeleteFunction {
-                var uri = Uri.fromParts("package", packageName, null)
-                val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, uri)
-                getResult.launch(intent)
-            }
+            DialogUtil.showDialog(
+                DialogTag.PermissionDialog,
+                fm = supportFragmentManager,
+                onPositiveBtnFunc = { enterPermissionView() },
+                onNegativeBtnFunc = { enterSeveral() }
+                )
         }
         else {
             startModule()
             startLoading()
         }
+    }
+
+    private fun enterPermissionView() {
+        var uri = Uri.fromParts("package", packageName, null)
+        val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, uri)
+        getResult.launch(intent)
     }
 }
