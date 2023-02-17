@@ -2,6 +2,7 @@ package com.example.engwordlockscreen.presentation.main.word.components.insert
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +14,11 @@ import androidx.lifecycle.lifecycleScope
 import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.databinding.FragmentWordInsertBinding
 import com.example.engwordlockscreen.domain.database.WordEntities
-import com.example.engwordlockscreen.presentation.utils.StringFilter
-import com.example.engwordlockscreen.presentation.main.word.WordEvent
 import com.example.engwordlockscreen.presentation.main.WordViewModel
+import com.example.engwordlockscreen.presentation.main.word.WordEvent
+import com.example.engwordlockscreen.presentation.utils.showInsertCompleteToast
+import com.example.engwordlockscreen.presentation.utils.showInsertErrorToast
+import com.example.engwordlockscreen.presentation.utils.string.StringFilter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -25,56 +28,78 @@ class WordInsertFragment : Fragment() {
     private var mInflater : LinearLayout? = null
     private var insertView : View? = null
     private var viewCount : Int = 0
-    private var binding : FragmentWordInsertBinding? = null
+    private var _binding : FragmentWordInsertBinding? = null
+    private val binding get() = _binding!!
     private var wordList = arrayListOf<WordEntities>()
     private val viewModel by activityViewModels<WordViewModel>()
 
 
+    /*
+     *  LifeCycle Callback
+     */
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        binding = FragmentWordInsertBinding.inflate(inflater,container,false)
+        Log.d("onCreate", "onCreate() Call")
+        _binding = FragmentWordInsertBinding.inflate(inflater,container,false)
         init()
         buttonClick()
-        return binding?.root
+        return binding.root
     }
+
+    override fun onPause() {
+        Log.d("onPause", "onPause() Call")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        Log.d("onStop", "onStop() Call")
+        super.onStop()
+    }
+
     override fun onDestroyView() {
+        Log.d("onDestroy","onDestroyView() Call")
         super.onDestroyView()
-        binding = null
+        _binding = null
         viewCount = 0
     }
 
 
 
 
-    ////////////////////////////////////////// function
+    /*
+     *  Function for Views
+     */
 
     private fun init()
     {
-        binding?.wordInsertEdittext?.filters = arrayOf(StringFilter.filterENG)
+        binding.wordInsertEdittext.filters = arrayOf(StringFilter.filterENG)
     }
 
     private fun buttonClick()
     {
-        binding?.insertFormButton!!.setOnClickListener {
+        binding.insertFormButton.setOnClickListener {
             insertForm()
         }
-        binding?.deleteFormButton!!.setOnClickListener {
+        binding.deleteFormButton.setOnClickListener {
             removeForm()
         }
-        binding?.insertList!!.setOnClickListener {
+        binding.insertList.setOnClickListener {
             insertDB()
         }
     }
 
+    // TODO RecyclerView 형태로 변화.
     private fun insertForm()
     {
         inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
-        mInflater = binding?.wordMeanInsert
+        mInflater = binding.wordMeanInsert
         insertView = inflater?.inflate(R.layout.design_insert_form,mInflater,false)
         if ( viewCount < 5 ) {
             insertView?.id = 0x8898 + (5 - viewCount)
-            insertView?.findViewById<EditText>(R.id.insert_mean_edittext)?.filters = arrayOf(StringFilter.filterKOR)
-            binding?.wordMeanInsert!!.addView(insertView)
+            insertView?.findViewById<EditText>(R.id.insert_mean_edittext)?.filters = arrayOf(
+                StringFilter.filterKOR)
+            binding.wordMeanInsert.addView(insertView)
             viewCount++
         }
         else {
@@ -82,11 +107,11 @@ class WordInsertFragment : Fragment() {
         }
     }
 
-
+    // TODO RecyclerView 형태로 변화.
     private fun removeForm()
     {
         if ( viewCount > 0) {
-            binding?.wordMeanInsert!!.removeViewAt(--viewCount)
+            binding.wordMeanInsert.removeViewAt(--viewCount)
         }
         else
         {
@@ -96,10 +121,10 @@ class WordInsertFragment : Fragment() {
 
     private fun insertDB()
     {
-        val word = binding?.wordInsertEdittext?.text.toString()
+        val word = binding.wordInsertEdittext.text.toString()
         if ( word == "" ) { Toast.makeText(context,"단어 또는 뜻이 없어 추가할 수 없습니다.",Toast.LENGTH_SHORT).show() }
         else {
-            for (i in binding?.wordMeanInsert?.children!!) {
+            for (i in binding.wordMeanInsert.children!!) {
                 val meanId =
                     i.findViewById<RelativeLayout>(i.id)
                         ?.findViewById<EditText>(R.id.insert_mean_edittext)
@@ -125,14 +150,20 @@ class WordInsertFragment : Fragment() {
         }
     }
 
-    private fun insertList(wordEntity: ArrayList<WordEntities>)
+    private fun insertList(wordEntities: ArrayList<WordEntities>)
     {
-        for ( i in wordEntity.indices)
-        {
-            viewModel.onEvent(WordEvent.Insert(wordEntity[i]))
-        }
         viewLifecycleOwner.lifecycleScope.launch {
-            Toast.makeText(context,wordEntity[0].word + " 등록 완료.",Toast.LENGTH_LONG).show()
+            runCatching {
+                wordEntities.forEach { wordEntity ->
+                    viewModel.onEvent(WordEvent.Insert(wordEntity))
+                }
+            }.onSuccess {
+                Log.d("success msg", "ok")
+                requireContext().showInsertCompleteToast(wordEntities[0].word)
+            }.onFailure {
+                Log.d("failure msg", "ok")
+                requireContext().showInsertErrorToast(wordEntities[0].word)
+            }
             wordList.clear()
         }
     }

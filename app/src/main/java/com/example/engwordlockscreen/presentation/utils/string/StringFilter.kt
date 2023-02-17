@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.presentation.utils
+package com.example.engwordlockscreen.presentation.utils.string
 
 import android.text.InputFilter
 import java.util.regex.Pattern

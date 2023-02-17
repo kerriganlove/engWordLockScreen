@@ -17,7 +17,6 @@ class MainViewPagerAdapter(fa : FragmentActivity) : FragmentStateAdapter(fa) {
         var fragment = when(position) {
             0 -> {
                 WordInsertFragment()
-
             }
             1 -> {
                 WordListFragment()

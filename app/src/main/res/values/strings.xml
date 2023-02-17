@@ -1,4 +1,6 @@
 <resources>
+
+    <!-- Common Text -->
     <string name="app_name">영어단어 잠금화면</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="word_insert">단어 등록</string>
@@ -19,6 +21,10 @@
     <string name="yes">예</string>
     <string name="no">아니오</string>
     <string name="screen_off">무료 해제</string>
+
+    <!-- Word Insert Text -->
+    <string name="insert_complete_text">%s 등록이 완료되었습니다.</string>
+    <string name="insert_error_text">%s 등록에 오류가 발생했습니다.\n 다시 시도해주세요.</string>
 
     <!-- Permission Text -->
     <string name="permission_error_text">권한 거부로 잠금화면 기능을 이용하실 수 없습니다.\n 잠금화면을 사용하시려면 설정에서 권한 허용을 클릭해주세요.</string>
