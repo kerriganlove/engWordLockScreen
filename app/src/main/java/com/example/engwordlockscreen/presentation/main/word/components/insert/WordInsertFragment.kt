@@ -11,11 +11,13 @@ import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.engwordlockscreen.R
 import com.example.engwordlockscreen.databinding.FragmentWordInsertBinding
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.presentation.main.WordViewModel
 import com.example.engwordlockscreen.presentation.main.word.WordEvent
+import com.example.engwordlockscreen.presentation.utils.showAddViewOverflowToast
 import com.example.engwordlockscreen.presentation.utils.showInsertCompleteToast
 import com.example.engwordlockscreen.presentation.utils.showInsertErrorToast
 import com.example.engwordlockscreen.presentation.utils.string.StringFilter
@@ -24,9 +26,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class WordInsertFragment : Fragment() {
-    private var inflater : LayoutInflater? = null
-    private var mInflater : LinearLayout? = null
-    private var insertView : View? = null
     private var viewCount : Int = 0
     private var _binding : FragmentWordInsertBinding? = null
     private val binding get() = _binding!!
@@ -73,7 +72,15 @@ class WordInsertFragment : Fragment() {
 
     private fun init()
     {
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         binding.wordInsertEdittext.filters = arrayOf(StringFilter.filterENG)
+        binding.wordMeanInsert.apply {
+            adapter = WordInsertRecyclerViewAdapter()
+            hasFixedSize()
+            animation = null
+            layoutManager = LinearLayoutManager(context)
+        }
     }
 
     private fun buttonClick()
@@ -90,32 +97,25 @@ class WordInsertFragment : Fragment() {
     }
 
     // TODO RecyclerView 형태로 변화.
-    private fun insertForm()
-    {
-        inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
-        mInflater = binding.wordMeanInsert
-        insertView = inflater?.inflate(R.layout.design_insert_form,mInflater,false)
-        if ( viewCount < 5 ) {
-            insertView?.id = 0x8898 + (5 - viewCount)
-            insertView?.findViewById<EditText>(R.id.insert_mean_edittext)?.filters = arrayOf(
-                StringFilter.filterKOR)
-            binding.wordMeanInsert.addView(insertView)
-            viewCount++
-        }
-        else {
-            Toast.makeText(context,"더 이상 추가하실 수 없습니다.",Toast.LENGTH_SHORT).show()
+    private fun insertForm() {
+        viewModel._insertWordList.value.run {
+            if ( size < 5 ) {
+                add(WordEntities())
+                Log.d("======","${viewModel.insertWordList.value}")
+                binding.wordMeanInsert.adapter?.notifyItemInserted(0)
+            } else {
+                context?.showAddViewOverflowToast()
+            }
         }
     }
 
     // TODO RecyclerView 형태로 변화.
-    private fun removeForm()
-    {
-        if ( viewCount > 0) {
-            binding.wordMeanInsert.removeViewAt(--viewCount)
-        }
-        else
-        {
-            Toast.makeText(context,"더 이상 삭제하실 수 없습니다.",Toast.LENGTH_SHORT).show()
+    private fun removeForm() {
+        viewModel._insertWordList.value.run {
+            if ( size > 0) {
+                removeLast()
+                binding.wordMeanInsert.adapter?.notifyItemRemoved(0)
+            }
         }
     }
 
@@ -158,10 +158,8 @@ class WordInsertFragment : Fragment() {
                     viewModel.onEvent(WordEvent.Insert(wordEntity))
                 }
             }.onSuccess {
-                Log.d("success msg", "ok")
                 requireContext().showInsertCompleteToast(wordEntities[0].word)
             }.onFailure {
-                Log.d("failure msg", "ok")
                 requireContext().showInsertErrorToast(wordEntities[0].word)
             }
             wordList.clear()

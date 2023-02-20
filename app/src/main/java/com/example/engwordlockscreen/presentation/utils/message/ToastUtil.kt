@@ -9,3 +9,5 @@ fun Context.showPermissionToast() = Toast.makeText(this, this.getString(R.string
 fun Context.showInsertCompleteToast(word : String) = Toast.makeText(this, String.format(this.getString(R.string.insert_complete_text), word), Toast.LENGTH_SHORT).show()
 
 fun Context.showInsertErrorToast(word : String) = Toast.makeText(this, String.format(this.getString(R.string.insert_error_text), word), Toast.LENGTH_SHORT).show()
+
+fun Context.showAddViewOverflowToast() = Toast.makeText(this, this.getString(R.string.add_insert_view_overflow_text),Toast.LENGTH_SHORT).show()

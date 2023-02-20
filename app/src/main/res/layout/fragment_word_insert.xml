@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.engwordlockscreen.presentation.main.WordViewModel" />
+    </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -39,14 +45,14 @@
             android:layout_weight="1"/>
     </LinearLayout>
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/word_mean_insert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mean_button_list"
-        android:orientation="vertical">
+        android:setInsertList="@{viewModel.insertWordList}">
 
-    </LinearLayout>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:id="@+id/insert_button_set"
@@ -71,3 +77,5 @@
 
 
 </RelativeLayout>
+
+</layout>

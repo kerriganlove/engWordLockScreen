@@ -15,6 +15,9 @@ class WordViewModel @Inject constructor(
     private val wordUseCases: WordUseCases,
     ) : ViewModel() {
 
+    var _insertWordList = MutableStateFlow<MutableList<WordEntities>>(mutableListOf())
+    val insertWordList = _insertWordList.asStateFlow()
+
     fun onEvent(event: WordEvent) {
         when (event) {
             is WordEvent.Insert -> {
