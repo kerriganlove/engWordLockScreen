@@ -4,9 +4,11 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Spinner
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
+import androidx.databinding.InverseMethod
 import androidx.recyclerview.widget.RecyclerView
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.presentation.main.word.components.insert.WordInsertRecyclerViewAdapter
@@ -16,12 +18,12 @@ object BindingAdapter {
 
     /*
      *  Spinner
-     *  View to Model
+     *  View to Model By Insert Word
      */
     @JvmStatic
     @InverseBindingAdapter(attribute = "selectedValue", event = "selectItemChangeEvent")
-    fun Spinner.getSelectItem() : Any? {
-        return selectedItem
+    fun Spinner.getSelectItem() : String? {
+        return selectedItem.toString()
     }
 
     @JvmStatic
@@ -43,17 +45,13 @@ object BindingAdapter {
 
     @JvmStatic
     @androidx.databinding.BindingAdapter("selectedValue")
-    fun Spinner.setSelectItem(selectValue : StateFlow<Any>?) {
+    fun Spinner.setSelectItem(selectValue : String) {
         adapter?.run {
             val position = (this as ArrayAdapter<Any>).getPosition(selectValue)
-            setSelection(position, false)
+            setSelection(position, true)
+            tag = position
         }
     }
-
-    /*
-     *  EditText
-     *  View To Model
-     */
 
 
     /*
@@ -62,11 +60,8 @@ object BindingAdapter {
     @JvmStatic
     @androidx.databinding.BindingAdapter("android:setInsertList")
     fun RecyclerView.setInsertList(list : StateFlow<Any>?) {
-        Log.d("before insertList", "$list")
         list?.run {
-            Log.d("before", "$value")
             (adapter as WordInsertRecyclerViewAdapter).setList(value as List<WordEntities>)
         }
     }
-
 }

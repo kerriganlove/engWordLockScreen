@@ -19,6 +19,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/edittext_selector_design"
         android:hint="@string/word_hint"
+        android:text="@={viewModel._word}"
         android:gravity="center"/>
 
     <LinearLayout

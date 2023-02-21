@@ -1,18 +1,21 @@
 package com.example.engwordlockscreen.presentation.main.word.components.insert
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.EditText
+import android.widget.RelativeLayout
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.engwordlockscreen.R
+import com.example.engwordlockscreen.constants.CustomConst
 import com.example.engwordlockscreen.databinding.FragmentWordInsertBinding
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.presentation.main.WordViewModel
@@ -26,7 +29,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class WordInsertFragment : Fragment() {
-    private var viewCount : Int = 0
     private var _binding : FragmentWordInsertBinding? = null
     private val binding get() = _binding!!
     private var wordList = arrayListOf<WordEntities>()
@@ -60,10 +62,7 @@ class WordInsertFragment : Fragment() {
         Log.d("onDestroy","onDestroyView() Call")
         super.onDestroyView()
         _binding = null
-        viewCount = 0
     }
-
-
 
 
     /*
@@ -73,11 +72,12 @@ class WordInsertFragment : Fragment() {
     private fun init()
     {
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.wordInsertEdittext.filters = arrayOf(StringFilter.filterENG)
         binding.wordMeanInsert.apply {
-            adapter = WordInsertRecyclerViewAdapter()
-            hasFixedSize()
+            adapter = WordInsertRecyclerViewAdapter { pos, wordEntities ->
+                onChange(pos, wordEntities)
+            }
             animation = null
             layoutManager = LinearLayoutManager(context)
         }
@@ -96,13 +96,23 @@ class WordInsertFragment : Fragment() {
         }
     }
 
+    /*
+     *  Recycler View Item Change
+     */
+    private fun onChange(pos: Int, data: WordEntities) {
+        Log.d("Hi","$pos, $data")
+        val list = viewModel._insertWordList.value.toMutableList()
+        list[pos] = data
+        viewModel._insertWordList.value = list.toList()
+    }
+
     // TODO RecyclerView 형태로 변화.
     private fun insertForm() {
-        viewModel._insertWordList.value.run {
+       viewModel._insertWordList.value.toMutableList().run {
             if ( size < 5 ) {
                 add(WordEntities())
-                Log.d("======","${viewModel.insertWordList.value}")
-                binding.wordMeanInsert.adapter?.notifyItemInserted(0)
+                viewModel._insertWordList.value = this.toList()
+                binding.wordMeanInsert.adapter?.notifyItemInserted(size-1)
             } else {
                 context?.showAddViewOverflowToast()
             }
@@ -111,10 +121,11 @@ class WordInsertFragment : Fragment() {
 
     // TODO RecyclerView 형태로 변화.
     private fun removeForm() {
-        viewModel._insertWordList.value.run {
+        viewModel._insertWordList.value.toMutableList().run {
             if ( size > 0) {
                 removeLast()
-                binding.wordMeanInsert.adapter?.notifyItemRemoved(0)
+                viewModel._insertWordList.value = this.toList()
+                binding.wordMeanInsert.adapter?.notifyItemRemoved(size)
             }
         }
     }

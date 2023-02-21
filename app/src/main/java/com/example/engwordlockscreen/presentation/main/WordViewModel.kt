@@ -1,6 +1,8 @@
 package com.example.engwordlockscreen.presentation.main
 
+import android.util.Log
 import androidx.lifecycle.*
+import com.example.engwordlockscreen.constants.CustomConst
 import com.example.engwordlockscreen.constants.UiState
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.domain.usecase.wordusecases.WordUseCases
@@ -15,8 +17,19 @@ class WordViewModel @Inject constructor(
     private val wordUseCases: WordUseCases,
     ) : ViewModel() {
 
-    var _insertWordList = MutableStateFlow<MutableList<WordEntities>>(mutableListOf())
+    var _insertWordList = MutableStateFlow<List<WordEntities>>(mutableListOf())
     val insertWordList = _insertWordList.asStateFlow()
+
+    fun showLog() {
+        viewModelScope.launch {
+            insertWordList.collect {
+                Log.d("Hi","i'm changed ${it.size}")
+            }
+        }
+    }
+
+    var _word = MutableStateFlow("")
+    val word = _word.asStateFlow()
 
     fun onEvent(event: WordEvent) {
         when (event) {
