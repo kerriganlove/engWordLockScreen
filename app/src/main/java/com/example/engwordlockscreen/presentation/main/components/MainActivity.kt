@@ -24,6 +24,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         init()
     }
 
+    fun getEmoji() : String {
+        return String(Character.toChars(0x270D))
+    }
+
     private fun init()
     {
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(this)

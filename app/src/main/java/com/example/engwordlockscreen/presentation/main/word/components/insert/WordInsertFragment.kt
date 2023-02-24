@@ -100,9 +100,16 @@ class WordInsertFragment : Fragment() {
      *  Recycler View Item Change
      */
     private fun onChange(pos: Int, data: WordEntities) {
-        Log.d("Hi","$pos, $data")
         val list = viewModel._insertWordList.value.toMutableList()
-        list[pos] = data
+        list[pos].apply {
+            if ( data.parts.isNotEmpty()) {
+                parts = data.parts
+            }
+            if ( data.mean.isNotEmpty()) {
+                mean = data.mean
+            }
+        }
+        Log.d("Hi","${list[pos]}")
         viewModel._insertWordList.value = list.toList()
     }
 
@@ -129,6 +136,7 @@ class WordInsertFragment : Fragment() {
             }
         }
     }
+
 
     private fun insertDB()
     {

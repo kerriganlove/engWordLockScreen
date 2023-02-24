@@ -13,10 +13,7 @@ import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.presentation.utils.string.StringFilter
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class WordInsertRecyclerViewAdapter(
@@ -37,6 +34,7 @@ class WordInsertRecyclerViewAdapter(
         }
         fun clear() {
             job?.cancel()
+            Log.d("ViewHolder delete","${wordFlow.value}")
             binding.apply {
                 insertFormSpinner.setSelection(0)
                 insertMeanEdittext.setText("")

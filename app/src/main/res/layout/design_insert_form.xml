@@ -26,7 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/insert_mean_edittext"
             app:layout_constraintHorizontal_chainStyle="packed"
-            selectedValue="@={word.parts}"/>
+            app:selectedValue="@={word}"/>
 
         <EditText
             android:id="@+id/insert_mean_edittext"
@@ -39,7 +39,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/insert_form_spinner"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@={word.mean}" />
+            app:setMeanText="@={word}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

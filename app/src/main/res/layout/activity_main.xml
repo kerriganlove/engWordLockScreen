@@ -19,7 +19,8 @@
             android:text="@string/main_title"
             android:textColor="@color/white"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:id="@+id/main_toolbar_title"/>
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout

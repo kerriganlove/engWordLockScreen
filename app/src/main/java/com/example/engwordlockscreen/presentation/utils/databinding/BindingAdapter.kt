@@ -1,5 +1,7 @@
 package com.example.engwordlockscreen.presentation.utils.databinding
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -18,12 +20,12 @@ object BindingAdapter {
 
     /*
      *  Spinner
-     *  View to Model By Insert Word
+     *  View to Model For WordEntities.part
      */
     @JvmStatic
     @InverseBindingAdapter(attribute = "selectedValue", event = "selectItemChangeEvent")
-    fun Spinner.getSelectItem() : String? {
-        return selectedItem.toString()
+    fun Spinner.getSelectItem() : WordEntities {
+        return WordEntities(parts = selectedItem.toString())
     }
 
     @JvmStatic
@@ -45,11 +47,50 @@ object BindingAdapter {
 
     @JvmStatic
     @androidx.databinding.BindingAdapter("selectedValue")
-    fun Spinner.setSelectItem(selectValue : String) {
+    fun Spinner.setSelectItem(selectValue : WordEntities) {
         adapter?.run {
-            val position = (this as ArrayAdapter<Any>).getPosition(selectValue)
+            val position = (this as ArrayAdapter<Any>).getPosition(selectValue.parts)
             setSelection(position, true)
             tag = position
+        }
+    }
+
+    /*
+     *  EditText
+     *  View To Model For WordEntities.mean
+     */
+
+    @JvmStatic
+    @InverseBindingAdapter(attribute = "setMeanText", event = "meanTextChanged")
+    fun EditText.getMeanText() : WordEntities {
+        return WordEntities(mean = text.toString())
+    }
+
+    @JvmStatic
+    @androidx.databinding.BindingAdapter("meanTextChanged")
+    fun EditText.setMeanInverseBindingListener(inverseBindingListener: InverseBindingListener) {
+        addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                inverseBindingListener.onChange()
+            }
+
+        })
+    }
+
+    @JvmStatic
+    @androidx.databinding.BindingAdapter("setMeanText")
+    fun EditText.setMeanText(value : WordEntities) {
+        val oldText = text.toString()
+        if ( oldText == value.mean) {
+            setText(value.mean)
         }
     }
 

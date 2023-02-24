@@ -7,7 +7,9 @@ data class WordEntities(
     var word : String = "",
     var parts: String = "",
     var mean : String = ""
-)
+) {
+
+}
 
 fun WordEntities.toWordEntity() : WordEntity {
     return WordEntity(
