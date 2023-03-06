@@ -1,4 +1,4 @@
-package com.example.engwordlockscreen.presentation.splash.components
+package com.example.engwordlockscreen.presentation.main.components
 
 import android.app.Activity
 import android.content.Intent

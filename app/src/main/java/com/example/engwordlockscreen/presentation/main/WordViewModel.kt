@@ -20,6 +20,11 @@ class WordViewModel @Inject constructor(
     var _insertWordList = MutableStateFlow<List<WordEntities>>(mutableListOf())
     val insertWordList = _insertWordList.asStateFlow()
 
+    var searchText = MutableStateFlow<String>("")
+
+    private var _searchResult = MutableStateFlow<List<WordEntities>>(listOf())
+    val searchResult = _searchResult.asStateFlow()
+
     fun showLog() {
         viewModelScope.launch {
             insertWordList.collect {

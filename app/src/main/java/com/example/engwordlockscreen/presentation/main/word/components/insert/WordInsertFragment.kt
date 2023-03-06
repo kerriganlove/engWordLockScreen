@@ -1,6 +1,8 @@
 package com.example.engwordlockscreen.presentation.main.word.components.insert
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +17,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.engwordlockscreen.R
-import com.example.engwordlockscreen.constants.CustomConst
 import com.example.engwordlockscreen.databinding.FragmentWordInsertBinding
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.presentation.main.WordViewModel
@@ -78,9 +79,24 @@ class WordInsertFragment : Fragment() {
             adapter = WordInsertRecyclerViewAdapter { pos, wordEntities ->
                 onChange(pos, wordEntities)
             }
+            (adapter as WordInsertRecyclerViewAdapter).setList(wordList)
             animation = null
             layoutManager = LinearLayoutManager(context)
         }
+        binding.wordInsertEdittext.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                TODO("Not yet implemented")
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     private fun buttonClick()

@@ -22,7 +22,7 @@ class MainViewPagerAdapter(fa : FragmentActivity) : FragmentStateAdapter(fa) {
                 WordListFragment()
             }
             2 -> {
-                IdiomInsertFragment()
+                WordSearchFragment()
             }
             3 -> {
                 IdiomListFragment()

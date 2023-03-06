@@ -105,4 +105,10 @@ object BindingAdapter {
             (adapter as WordInsertRecyclerViewAdapter).setList(value as List<WordEntities>)
         }
     }
+
+    @JvmStatic
+    @androidx.databinding.BindingAdapter("android:setSearchResultList")
+    fun RecyclerView.setSearchResultList(list : List<WordEntities>?) {
+
+    }
 }
