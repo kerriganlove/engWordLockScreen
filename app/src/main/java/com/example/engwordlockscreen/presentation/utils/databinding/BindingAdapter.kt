@@ -14,6 +14,7 @@ import androidx.databinding.InverseMethod
 import androidx.recyclerview.widget.RecyclerView
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.presentation.main.word.components.insert.WordInsertRecyclerViewAdapter
+import com.example.engwordlockscreen.presentation.main.word.components.wordlist.recyclerview.WordListRecyclerViewAdapter
 import kotlinx.coroutines.flow.StateFlow
 
 object BindingAdapter {
@@ -100,15 +101,13 @@ object BindingAdapter {
      */
     @JvmStatic
     @androidx.databinding.BindingAdapter("android:setInsertList")
-    fun RecyclerView.setInsertList(list : StateFlow<Any>?) {
-        list?.run {
-            (adapter as WordInsertRecyclerViewAdapter).setList(value as List<WordEntities>)
-        }
+    fun RecyclerView.setInsertList(list : List<WordEntities>) {
+        (adapter as WordInsertRecyclerViewAdapter).setList(list)
     }
 
     @JvmStatic
     @androidx.databinding.BindingAdapter("android:setSearchResultList")
-    fun RecyclerView.setSearchResultList(list : List<WordEntities>?) {
-
+    fun RecyclerView.setSearchResultList(list : List<WordEntities>) {
+        (adapter as WordListRecyclerViewAdapter).updateItem(list)
     }
 }

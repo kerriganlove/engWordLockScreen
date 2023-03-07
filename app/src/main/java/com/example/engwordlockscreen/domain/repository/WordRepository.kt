@@ -18,4 +18,6 @@ interface WordRepository {
     suspend fun deleteAllWords()
 
     suspend fun getWordListByApi(engWord : String) : Flow<Response<List<WordApiModel>>>
+
+    suspend fun searchWord(s : String) : Flow<List<WordEntities>>
 }

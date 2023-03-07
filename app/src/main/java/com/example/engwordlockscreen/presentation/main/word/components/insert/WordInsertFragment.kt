@@ -83,20 +83,6 @@ class WordInsertFragment : Fragment() {
             animation = null
             layoutManager = LinearLayoutManager(context)
         }
-        binding.wordInsertEdittext.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                TODO("Not yet implemented")
-            }
-
-        })
     }
 
     private fun buttonClick()
@@ -133,7 +119,7 @@ class WordInsertFragment : Fragment() {
     private fun insertForm() {
        viewModel._insertWordList.value.toMutableList().run {
             if ( size < 5 ) {
-                add(WordEntities())
+                add(WordEntities(parts = "명사"))
                 viewModel._insertWordList.value = this.toList()
                 binding.wordMeanInsert.adapter?.notifyItemInserted(size-1)
             } else {
@@ -159,21 +145,10 @@ class WordInsertFragment : Fragment() {
         val word = binding.wordInsertEdittext.text.toString()
         if ( word == "" ) { Toast.makeText(context,"단어 또는 뜻이 없어 추가할 수 없습니다.",Toast.LENGTH_SHORT).show() }
         else {
-            for (i in binding.wordMeanInsert.children!!) {
-                val meanId =
-                    i.findViewById<RelativeLayout>(i.id)
-                        ?.findViewById<EditText>(R.id.insert_mean_edittext)
-                val partId =
-                    i.findViewById<RelativeLayout>(i.id)
-                        ?.findViewById<Spinner>(R.id.insert_form_spinner)
-                val mean = meanId?.text.toString()
-                val part = partId?.selectedItem.toString()
-                val wordEntity = WordEntities(0, word, part, mean)
-                if (mean != "" && word != "") {
-                    wordList.add(wordEntity)
-                } else {
-                    Toast.makeText(context, "단어 또는 뜻이 없어 추가할 수 없습니다.", Toast.LENGTH_SHORT).show()
-                }
+            viewModel.insertWordList.value.forEach {
+                    wordList.add(it.apply {
+                        it.word = word
+                    })
             }
             if (wordList.isNotEmpty()) {
                 insertList(wordList)

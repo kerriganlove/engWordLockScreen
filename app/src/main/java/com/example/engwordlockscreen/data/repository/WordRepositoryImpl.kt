@@ -36,4 +36,8 @@ class WordRepositoryImpl @Inject constructor(
     override suspend fun getWordListByApi(engWord: String): Flow<Response<List<WordApiModel>>> {
         return remoteRepository.getWordListByApi(engWord)
     }
+
+    override suspend fun searchWord(s: String): Flow<List<WordEntities>> {
+        return localRepository.searchWord(s)
+    }
 }

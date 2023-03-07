@@ -20,8 +20,11 @@ interface WordDAO
     @Query("SELECT * FROM wordDB GROUP BY word ORDER BY id")
     fun viewList() : Flow<List<WordEntity>>
 
-    @Query("SELECT * FROM wordDB WHERE word = :s")
+    @Query("SELECT * FROM wordDB WHERE word = :s ")
     fun viewSameWord(s : String) : Flow<List<WordEntity>>
+
+    @Query("SELECT * FROM wordDB WHERE word LIKE :s GROUP BY word ORDER BY id")
+    fun searchWord(s : String) : Flow<List<WordEntity>>
 
     @Query("DELETE FROM wordDB WHERE word = :s")
     suspend fun deleteSameWords(s : String)

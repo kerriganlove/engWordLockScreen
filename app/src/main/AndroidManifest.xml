@@ -32,7 +32,8 @@
             android:launchMode="singleInstance"
             android:taskAffinity="com.example.engwordlockscreen.lockscreen"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.example.engwordlockscreen.presentation.main.components.MainActivity">
+        <activity android:name="com.example.engwordlockscreen.presentation.main.components.MainActivity"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <service android:name="com.example.engwordlockscreen.presentation.lockscreen.components.LockScreenService"
             android:enabled="true"

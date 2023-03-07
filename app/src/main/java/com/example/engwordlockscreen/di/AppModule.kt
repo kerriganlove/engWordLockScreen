@@ -108,7 +108,8 @@ object AppModule {
             sameWordUseCase = SameWordUseCase(repository),
             viewListUseCase = ViewListUseCase(repository),
             deleteAllWordUseCase = DeleteAllWordUseCase(repository),
-            viewListByNaverApi = ViewListByNaverApiUseCase(repository)
+            viewListByNaverApi = ViewListByNaverApiUseCase(repository),
+            searchWordUseCase = SearchWordUseCase(repository)
                            )
     }
     @Provides

@@ -2,7 +2,6 @@ package com.example.engwordlockscreen.presentation.main
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.engwordlockscreen.constants.CustomConst
 import com.example.engwordlockscreen.constants.UiState
 import com.example.engwordlockscreen.domain.database.WordEntities
 import com.example.engwordlockscreen.domain.usecase.wordusecases.WordUseCases
@@ -22,8 +21,10 @@ class WordViewModel @Inject constructor(
 
     var searchText = MutableStateFlow<String>("")
 
-    private var _searchResult = MutableStateFlow<List<WordEntities>>(listOf())
-    val searchResult = _searchResult.asStateFlow()
+    val searchResult = searchText.debounce(500L)
+                    .map { "%$it%"  }
+                    .flatMapLatest { word -> wordUseCases.searchWordUseCase(word) }
+                    .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), listOf())
 
     fun showLog() {
         viewModelScope.launch {

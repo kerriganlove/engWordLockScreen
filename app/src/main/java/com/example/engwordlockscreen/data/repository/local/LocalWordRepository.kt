@@ -13,4 +13,6 @@ interface LocalWordRepository {
     suspend fun deleteSameWords(s : String)
 
     suspend fun deleteAllWords()
+
+    suspend fun searchWord(s : String) : Flow<List<WordEntities>>
 }

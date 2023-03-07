@@ -32,7 +32,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_weight="9"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintVertical_chainStyle="packed"
             android:setSearchResultList="@{viewModel.searchResult}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

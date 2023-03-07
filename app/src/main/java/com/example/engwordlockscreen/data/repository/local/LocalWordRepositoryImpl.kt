@@ -32,4 +32,8 @@ class LocalWordRepositoryImpl @Inject constructor(
         return dao.deleteAllWords()
     }
 
+    override suspend fun searchWord(s: String): Flow<List<WordEntities>> {
+        return dao.searchWord(s).map { it -> it.map { it.toWordEntities() } }
+    }
+
 }

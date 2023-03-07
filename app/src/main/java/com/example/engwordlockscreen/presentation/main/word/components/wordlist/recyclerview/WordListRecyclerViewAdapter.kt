@@ -8,8 +8,8 @@ import com.example.engwordlockscreen.databinding.ListCustomItemBinding
 import com.example.engwordlockscreen.domain.database.WordEntities
 
 class WordListRecyclerViewAdapter(
-    private val longClick : (String) -> Unit,
-    private val click : (String) -> Unit
+    private val longClick : (String) -> Unit = {},
+    private val click : (String) -> Unit = {}
 ) : ListAdapter<WordEntities, RecyclerView.ViewHolder>(diffUtil) {
 
     /*
